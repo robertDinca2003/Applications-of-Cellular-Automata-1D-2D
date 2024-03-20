@@ -129,6 +129,10 @@ add_executable(${PROJECT_NAME}
     main.cpp
     generated/src/Helper.cpp
     env_fixes.h
+        ElementaryRule.h
+        ElementaryRule.cpp
+        Menu.h
+        Menu.cpp
 )
 
 ###############################################################################
