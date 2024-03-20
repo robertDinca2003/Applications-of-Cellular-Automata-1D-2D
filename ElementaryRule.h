@@ -35,7 +35,7 @@ public:
     ElementaryRule &operator=(const ElementaryRule&);
 
     // Getters
-    [[nodiscard]] int getNumber() const;
+    [[nodiscard]] int getRuleNumber() const;
     [[nodiscard]] int getCurrGenNumber() const;
     [[nodiscard]] vector<int> getCurrGeneration() const;
     [[nodiscard]] vector<int> getStartGen() const;

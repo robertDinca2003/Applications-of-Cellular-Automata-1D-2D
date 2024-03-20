@@ -103,7 +103,7 @@ ElementaryRule& ElementaryRule::operator=(const ElementaryRule &other){
     return *this;
 }
 
-int ElementaryRule::getNumber() const {
+int ElementaryRule::getRuleNumber() const {
     return this->ruleNumber;
 }
 int ElementaryRule::getCurrGenNumber() const{
