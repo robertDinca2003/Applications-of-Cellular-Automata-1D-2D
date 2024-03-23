@@ -14,7 +14,7 @@
 /// NOTE: this include is needed for environment-specific fixes     //
 /// You can remove this include and the call from main              //
 /// if you have tested on all environments, and it works without it //
-#include "env_fixes.h"                                              //
+//#include "env_fixes.h"                                              //
 //////////////////////////////////////////////////////////////////////
 #include "Menu.h"
 
@@ -22,16 +22,27 @@
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-void runGame(Menu* current){
-    if(current == nullptr)
-        return;
-    else{
-        cout << *current;
-        //current->DisplayContent();
-        Menu* next = current->TakeInput();
-        delete current;
-        runGame(next);
-    }
+void runGame(Menu* current, sf::RenderWindow *window, sf::Event *event){
+
+    while (window->isOpen())
+        while (window->pollEvent(*event)) {
+            if (event->type == sf::Event::Closed)
+                window->close();
+            if (current == nullptr)
+            {   window->close();
+                return;}
+            else {
+
+
+                cout << *current;
+                current->DisplayScreen(window);
+                current->DisplayContent();
+                Menu *next = current->TakeInput(window,event);
+                delete current;
+                runGame(next, window, event);
+            }
+        }
+
 
 }
 
@@ -43,7 +54,6 @@ int main() {
 
 
 
-    runGame(new Main());
 
     ElementaryRule rule30(30);
     rule30.DisplayCurrentGeneration();
@@ -74,7 +84,7 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode(1200,600),"SFML Window");
     window.setFramerateLimit(60);
-
+    sf::Event event;
     sf::Font font;
     if(!font.loadFromFile("myfont.ttf"))
         return EXIT_FAILURE;
@@ -86,22 +96,18 @@ int main() {
     text.setFillColor(sf::Color::Blue);
     text.setPosition(400.f,250.f);
 
-    while(window.isOpen())
-    {
-        sf::Event event;
-        while(window.pollEvent(event)){
-            if(event.type == sf::Event::Closed)
-                window.close();
-        }
+    window.clear(sf::Color::White);
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
+    shape.setPosition(500,200);
+    window.draw(shape);
+    window.draw(text);
+    window.display();
 
-        window.clear(sf::Color::White);
-        sf::CircleShape shape(100.f);
-        shape.setFillColor(sf::Color::Green);
-        shape.setPosition(500,200);
-        window.draw(shape);
-        window.draw(text);
-        window.display();
-    }
+    runGame(new Main(),&window,&event);
+
+
+
 
 
     ///////////////////////////////////////////////////////////////////////////

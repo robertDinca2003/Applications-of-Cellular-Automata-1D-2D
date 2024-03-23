@@ -72,10 +72,177 @@ void WolframVisualMenu::DisplayContent() const{
     }
 }
 
+void Main::DisplayScreen(sf::RenderWindow* window) {
+    vector<string> content(5);
 
-Menu* WolframVisualMenu::TakeInput(){
+    content[0]="<--- Applications of Cellular Automata --->\n\n";
+    content[1]="1. Visualization\n";
+    content[2]="2. Cryptography\n";
+    content[3] ="3. Fractals\n";
+    content[4] = "4. Exit";
+
+    string display = "";
+    for(int i = 0; i<5; i++)
+        display += content[i];
+
+    sf::Font font;
+    font.loadFromFile("myfont.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setString(display);
+    text.setCharacterSize(24);
+    text.setPosition(100.f,50.f);
+    text.setFillColor(sf::Color::Blue);
+    text.setLineSpacing(1.5f);
+
+    window->clear(sf::Color::White);
+    window->draw(text);
+    window->display();
+}
+
+void Visualization::DisplayScreen(sf::RenderWindow* window) {
+    vector<string> content(6);
+
+    content[0]="<--- Visualization --->\n\n";
+    content[1]="1. Wolfram's Elementary Rules\n";
+    content[2]="2. Conway's Game of Life\n";
+    content[3] ="3. Belousov-Zhabotinsky\n";
+    content[4] = "4. Custom 2D automaton\n";
+    content[5] = "5. Back";
+    string display = "";
+
+
+
+    for(int i = 0; i<6; i++)
+        display += content[i];
+
+    sf::Font font;
+    font.loadFromFile("myfont.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setString(display);
+    text.setCharacterSize(24);
+    text.setPosition(300.f,50.f);
+    text.setFillColor(sf::Color::Blue);
+    text.setLineSpacing(1.5f);
+
+    window->clear(sf::Color::White);
+    window->draw(text);
+    window->display();
+}
+
+void Cryptography::DisplayScreen(sf::RenderWindow* window) {
+
+    vector<string> content(4);
+
+    content[0]="<--- Cryptography --->\n\n";
+    content[1]="1. Image Encryption\n";
+    content[2]="2. Text Encryption\n";
+    content[3] ="3. Back\n";
+
+
+
+
+    string display = "";
+    for(int i = 0; i<4; i++)
+        display += content[i];
+
+    sf::Font font;
+    font.loadFromFile("myfont.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setString(display);
+    text.setCharacterSize(24);
+    text.setPosition(300.f,50.f);
+    text.setFillColor(sf::Color::Blue);
+    text.setLineSpacing(1.5f);
+
+    window->clear(sf::Color::White);
+    window->draw(text);
+    window->display();
+}
+
+void Fractal::DisplayScreen(sf::RenderWindow* window) {
+    vector<string> content(4);
+    content[0] = "<--- Fractals --->\n";
+    content[1] = "1. Wolfram's Elementary Rules\n";
+    content[2] = "2. More Fractals\n";
+    content[3] = "3. Back\n";
+
+    string display = "";
+    for(int i = 0; i<4; i++)
+        display += content[i];
+
+    sf::Font font;
+    font.loadFromFile("myfont.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setString(display);
+    text.setCharacterSize(24);
+    text.setPosition(300.f,50.f);
+    text.setFillColor(sf::Color::Blue);
+    text.setLineSpacing(1.5f);
+
+    window->clear(sf::Color::White);
+    window->draw(text);
+    window->display();
+
+}
+void WolframVisualMenu::DisplayScreen(sf::RenderWindow* window) {
+    vector<string> content(14);
+    content[0] = "<--- Wolfram's Rules Visualization --->\n";
+    content[1] = "Select (1 , 2 ,3) to change \nCurrent settings\n";
+    content[2] = "1. Current Rule: " + to_string(this->ruleNumber);
+    content[3] = "\n2. Maximum Length: "+ to_string(this->maxLength);
+    content[4] = "\n3. Maximum Depth: "+ to_string(this->maxDepth);
+    content[5] = "\n4. Generate";
+    content[6] = "\n5. Back\n";
+    content[7] = "<--- Wolfram's Rules " + to_string(this->ruleNumber) + " --->\n";
+    content[8] ="1. Next Generation\n";
+    content[9] = "2. Previous Generation\n";
+    content[10] = "3. Go To A Generation\n   By Number\n";
+    content[11] = "4. Complete All Generation\n";
+    content[12] = "5. Back\n";
+    content[13] = "";
+
+    string display = "";
+    for(int i = 0; i<7; i++)
+    {
+        display += content[i+this->state*7];
+    }
+    sf::Font font;
+    font.loadFromFile("myfont.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setString(display);
+    if(this->state == 0)
+    {
+        text.setCharacterSize(24);
+        text.setPosition(150.f,50.f);
+
+    }
+    else
+    {
+        text.setCharacterSize(8);
+        text.setPosition(30.f,10.f);
+
+    }
+    text.setFillColor(sf::Color::Blue);
+    text.setLineSpacing(1.5f);
+
+    window->clear(sf::Color::White);
+    window->draw(text);
+    window->display();
+}
+
+Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
     cout << "\nCurrent Input: ";
-    cin >> input;
+    cout << "I am here\n";
+    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+    cout << "I got out\n";
+    if(event->type == sf::Event::Closed)return nullptr;
+    if(event->type == sf::Event::KeyPressed)input = event->key.code-26;
+
     int rNum = this->ruleNumber;
     int mLen = this->maxLength;
     int mDep = this->maxDepth;
@@ -85,14 +252,22 @@ Menu* WolframVisualMenu::TakeInput(){
         switch (input) {
             case 1:
                 cout << "Insert new rule number: ";
+                while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+                if(event->type == sf::Event::Closed)return nullptr;
                 cin >> rNum;
                 break;
             case 2:
                 cout << "Insert new maximum length: ";
+                while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+                if(event->type == sf::Event::Closed)return nullptr;
                 cin >> mLen;
                 break;
             case 3:
                 cout << "Insert new maximum depth: ";
+                while((event->type != sf::Event::KeyPressed || event->key.code != sf::Keyboard::Enter) && event->type != sf::Event::Closed)
+                {
+                    window->pollEvent(*event);}
+                if(event->type == sf::Event::Closed)return nullptr;
                 cin >> mDep;
                 break;
             case 4:
@@ -140,9 +315,16 @@ Menu* WolframVisualMenu::TakeInput(){
     return new WolframVisualMenu();
 }
 
-Menu* Main::TakeInput() {
+Menu* Main::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
-    cin >> input;
+    cout << "I am here\n";
+    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+    cout << "I got out\n";
+    if(event->type == sf::Event::Closed)return nullptr;
+    if(event->type == sf::Event::KeyPressed)
+    {input = to_string(char(event->key.code-26));
+        cout << event->key.code <<'\n';}
+    else input = "-1";
     if(input == "1"){
         return new Visualization();
     }
@@ -159,9 +341,15 @@ Menu* Main::TakeInput() {
 
 }
 
-Menu* Visualization::TakeInput() {
+Menu* Visualization::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
-    cin >> input;
+    cout << "I am here\n";
+    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+    cout << "I got out\n";
+    if(event->type == sf::Event::Closed)return nullptr;
+    if(event->type == sf::Event::KeyPressed)
+    {input = to_string(char(event->key.code-26));
+        cout << event->key.code <<'\n';}
     if(input == "1"){
         //Wolfram
         return new WolframVisualMenu();
@@ -187,9 +375,15 @@ Menu* Visualization::TakeInput() {
 
 }
 
-Menu* Fractal::TakeInput() {
+Menu* Fractal::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
-    cin >> input;
+    cout << "I am here\n";
+    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+    cout << "I got out\n";
+    if(event->type == sf::Event::Closed)return nullptr;
+    if(event->type == sf::Event::KeyPressed)
+    {input = to_string(char(event->key.code-26));
+        cout << event->key.code <<'\n';}
     if(input == "1"){
         //Wolfram
         return new Fractal();
@@ -206,9 +400,15 @@ Menu* Fractal::TakeInput() {
 
 }
 
-Menu* Cryptography::TakeInput() {
+Menu* Cryptography::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
-    cin >> input;
+    cout << "I am here\n";
+    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+    cout << "I got out\n";
+    if(event->type == sf::Event::Closed)return nullptr;
+    if(event->type == sf::Event::KeyPressed)
+    {input = to_string(char(event->key.code-26));
+        cout << event->key.code <<'\n';}
     if(input == "1"){
         //Image
         return new Cryptography();

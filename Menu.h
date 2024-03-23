@@ -9,14 +9,15 @@
 #include <vector>
 #include <string>
 #include "ElementaryRule.h"
-
+#include <SFML/Graphics.hpp>
 using namespace std;
 
 class Menu{
 private:
 public:
     virtual void DisplayContent() const = 0;
-    virtual Menu* TakeInput() = 0 ;
+    virtual void DisplayScreen(sf::RenderWindow*) = 0;
+    virtual Menu* TakeInput(sf::RenderWindow*,sf::Event*) = 0 ;
     Menu(){
         cout << "Constructed Menu\n";
     };
@@ -25,7 +26,6 @@ public:
     friend ostream &operator<<(ostream &os, const Menu &menu) {
 
         menu.DisplayContent();
-
         return os;
     }
 };
@@ -33,20 +33,24 @@ public:
 class Main: public Menu{
 public:
     void DisplayContent() const override;
-    Menu* TakeInput() override;
+    virtual void DisplayScreen(sf::RenderWindow*) override;
+    Menu* TakeInput(sf::RenderWindow*,sf::Event*) override;
 
 };
 class Visualization: public Menu{
     void DisplayContent() const override;
-    Menu* TakeInput() override;
+    virtual void DisplayScreen(sf::RenderWindow*) override;
+    Menu* TakeInput(sf::RenderWindow*,sf::Event*) override;
 };
 class Cryptography: public Menu{
     void DisplayContent() const override;
-    Menu* TakeInput() override;
+    virtual void DisplayScreen(sf::RenderWindow*) override;
+    Menu* TakeInput(sf::RenderWindow*,sf::Event*) override;
 };
 class Fractal: public Menu{
     void DisplayContent() const override;
-    Menu* TakeInput() override;
+    virtual void DisplayScreen(sf::RenderWindow*) override;
+    Menu* TakeInput(sf::RenderWindow*,sf::Event*) override;
 };
 
 class WolframVisualMenu: public Menu{
@@ -59,8 +63,9 @@ private:
     ElementaryRule* ruleSet;
 public:
     explicit WolframVisualMenu(int state = 0, int ruleNumber = 255, int maxDepth = 30, int maxLength = 50, ElementaryRule*ruleSet = new ElementaryRule(255,30,50));
+    virtual void DisplayScreen(sf::RenderWindow*) override;
     void DisplayContent() const override;
-    Menu* TakeInput() override;
+    Menu* TakeInput(sf::RenderWindow*,sf::Event*) override;
 };
 
 #endif //OOP_MENU_H
