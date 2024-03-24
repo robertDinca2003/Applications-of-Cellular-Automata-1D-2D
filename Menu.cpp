@@ -1,15 +1,91 @@
 //
 // Created by robert on 20.03.2024.
 //
-
+#include <chrono>
+#include "MyTools.cpp"
 #include "Menu.h"
+
+
+void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event, Menu* men){
+    int temp = 0;
+    bool ok = false;
+    string inputMes;
+
+    sf::Text text;
+    sf::Font font;
+    font.loadFromFile("myfont.ttf");
+    text.setFont(font);
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::Blue);
+    text.setPosition(25,550);
+    text.setString("Insert: ");
+    men->DisplayScreen(window);
+    window->draw(text);
+    window->display();
+
+
+    while(event->type == sf::Event::TextEntered && int(event->text.unicode) == 13)window->pollEvent(*event);
+
+
+    while(!(event->type == sf::Event::TextEntered && int(event->text.unicode) == 13 && temp != 0) && event->type != sf::Event::Closed)
+    {
+
+            if(window->pollEvent(*event) && event->type == sf::Event::TextEntered && ok)
+            {
+                //cout << event->key.code <<'\n';
+                if(int(event->text.unicode) >=48 && int(event->text.unicode) <58)
+                {   temp = temp * 10 + static_cast<int>(event->text.unicode) - 48;
+                    if(temp > 5000) temp = 5000;
+                    cout << temp << '\n';
+                    inputMes= "Insert: "+ to_string(temp);
+                    text.setString(inputMes);
+
+                    sf::RectangleShape clearRect(sf::Vector2f(250.f, 45.f));
+                    clearRect.setPosition(20.f, 540.f);
+                    clearRect.setFillColor(sf::Color::White);
+                    window->draw(clearRect);
+
+                    window->draw(text);
+                    window->display();
+                }
+                if(event->text.unicode == 8)
+                {
+
+                    temp = temp / 10;
+
+                    cout << temp << '\n';
+                    inputMes= "Insert: "+ to_string(temp);
+                    text.setString(inputMes);
+                    sf::RectangleShape clearRect(sf::Vector2f(250.f, 45.f));
+                    clearRect.setPosition(20.f, 540.f);
+                    clearRect.setFillColor(sf::Color::White);
+                    window->draw(clearRect);
+                    window->draw(text);
+                    window->display();
+
+                }
+
+
+            }
+
+
+        ok = true;
+
+
+    }
+    if(event->type == sf::Event::Closed)
+        *input = "exit";
+    else
+    {cout << "Inputed Value is " << temp <<'\n';
+        *input = to_string(temp);}
+}
 
 WolframVisualMenu::WolframVisualMenu(int state , int ruleNumber , int maxDepth , int maxLength , ElementaryRule*ruleSet){
     this->state = state;
     this->ruleNumber = ruleNumber;
     this->maxDepth = maxDepth;
     this->maxLength = maxLength;
-    this->input = 0;
+    this->input = "0";
     this->ruleSet = ruleSet;
 }
 
@@ -81,7 +157,7 @@ void Main::DisplayScreen(sf::RenderWindow* window) {
     content[3] ="3. Fractals\n";
     content[4] = "4. Exit";
 
-    string display = "";
+    string display;
     for(int i = 0; i<5; i++)
         display += content[i];
 
@@ -109,7 +185,7 @@ void Visualization::DisplayScreen(sf::RenderWindow* window) {
     content[3] ="3. Belousov-Zhabotinsky\n";
     content[4] = "4. Custom 2D automaton\n";
     content[5] = "5. Back";
-    string display = "";
+    string display;
 
 
 
@@ -143,7 +219,7 @@ void Cryptography::DisplayScreen(sf::RenderWindow* window) {
 
 
 
-    string display = "";
+    string display;
     for(int i = 0; i<4; i++)
         display += content[i];
 
@@ -169,7 +245,7 @@ void Fractal::DisplayScreen(sf::RenderWindow* window) {
     content[2] = "2. More Fractals\n";
     content[3] = "3. Back\n";
 
-    string display = "";
+    string display;
     for(int i = 0; i<4; i++)
         display += content[i];
 
@@ -184,6 +260,7 @@ void Fractal::DisplayScreen(sf::RenderWindow* window) {
     text.setLineSpacing(1.5f);
 
     window->clear(sf::Color::White);
+
     window->draw(text);
     window->display();
 
@@ -205,7 +282,7 @@ void WolframVisualMenu::DisplayScreen(sf::RenderWindow* window) {
     content[12] = "5. Back\n";
     content[13] = "";
 
-    string display = "";
+    string display;
     for(int i = 0; i<7; i++)
     {
         display += content[i+this->state*7];
@@ -238,10 +315,11 @@ void WolframVisualMenu::DisplayScreen(sf::RenderWindow* window) {
 Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
     cout << "\nCurrent Input: ";
     cout << "I am here\n";
-    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-    cout << "I got out\n";
-    if(event->type == sf::Event::Closed)return nullptr;
-    if(event->type == sf::Event::KeyPressed)input = event->key.code-26;
+//    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+//    cout << "I got out\n";
+//    if(event->type == sf::Event::Closed)return nullptr;
+//    if(event->type == sf::Event::KeyPressed)input = event->key.code-26;
+    ReadFromKeyBoard(&input,window,event,this);
 
     int rNum = this->ruleNumber;
     int mLen = this->maxLength;
@@ -249,26 +327,49 @@ Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
     int cState = this->state ;
     if(this->state == 0)
     {
-        switch (input) {
+        string temp;
+        //int temp = 0;
+        //1bool ok;
+        sf::Text text;
+        sf::Font font;
+        font.loadFromFile("myfont.ttf");
+        text.setFont(font);
+        text.setCharacterSize(20);
+        text.setFillColor(sf::Color::Blue);
+        text.setPosition(25,550);
+
+
+        string inputMes= "Insert:";
+        text.setString(inputMes);
+        this->DisplayScreen(window);
+        window->draw(text);
+
+
+        switch (stoi(input)) {
             case 1:
                 cout << "Insert new rule number: ";
-                while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-                if(event->type == sf::Event::Closed)return nullptr;
-                cin >> rNum;
+                ReadFromKeyBoard(&temp,window,event,this);
+                cout << temp<<'\n';
+                if(temp == "exit")return nullptr;
+                rNum = stoi(temp);
                 break;
             case 2:
                 cout << "Insert new maximum length: ";
-                while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-                if(event->type == sf::Event::Closed)return nullptr;
-                cin >> mLen;
+                ReadFromKeyBoard(&temp,window,event,this);
+                if(temp == "exit")return nullptr;
+                mLen = stoi(temp);
                 break;
             case 3:
                 cout << "Insert new maximum depth: ";
-                while((event->type != sf::Event::KeyPressed || event->key.code != sf::Keyboard::Enter) && event->type != sf::Event::Closed)
-                {
-                    window->pollEvent(*event);}
-                if(event->type == sf::Event::Closed)return nullptr;
-                cin >> mDep;
+                //window->pollEvent(*event);
+                ReadFromKeyBoard(&temp,window,event,this);
+
+                if(temp == "exit")return nullptr;
+                mDep = stoi(temp);
+                if(mDep >5000)
+                    mDep = 5000;
+                if(mDep == 0)
+                    mDep = 1;
                 break;
             case 4:
                 cState = 1;
@@ -283,7 +384,7 @@ Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
     }
     if(this->state == 1)
     {
-        switch (input) {
+        switch (stoi(input)) {
             case 1:
                 ruleSet->CreateNextGen();
                 cout << ruleSet->getCurrGenNumber()<< '\n';
@@ -294,15 +395,16 @@ Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
                     ruleSet->UpdateCurrGeneration(ruleSet->getCurrGenNumber()-1);
                 break;
             case 3:
-                int tempInput;
+            {string tempInput;
                 cout << "\nInput the generation number:";
-                cin >> tempInput;
-                ruleSet->UpdateCurrGeneration(tempInput);
-                break;
+                ReadFromKeyBoard(&tempInput,window,event,this);
+                ruleSet->UpdateCurrGeneration(stoi(tempInput));
+                break;}
             case 4:
                 ruleSet->GenerateToMaxDepth();
                 break;
             case 5:
+
                 cState = 0;
                 break;
             default:
@@ -317,14 +419,15 @@ Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
 
 Menu* Main::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
+    ReadFromKeyBoard(&input,window,event,this);
     cout << "I am here\n";
-    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+//    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
     cout << "I got out\n";
-    if(event->type == sf::Event::Closed)return nullptr;
-    if(event->type == sf::Event::KeyPressed)
-    {input = to_string(char(event->key.code-26));
-        cout << event->key.code <<'\n';}
-    else input = "-1";
+//    if(event->type == sf::Event::Closed)return nullptr;
+//    if(event->type == sf::Event::KeyPressed)
+//    {input = to_string(char(event->key.code-26));
+//        cout << event->key.code <<'\n';}
+//    else input = "-1";
     if(input == "1"){
         return new Visualization();
     }
@@ -337,21 +440,27 @@ Menu* Main::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     if(input == "4"){
         return nullptr;
     }
+    if(input == "exit")
+        return nullptr;
+
     return new Main();
 
 }
 
 Menu* Visualization::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
+    ReadFromKeyBoard(&input,window,event,this);
     cout << "I am here\n";
-    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+    //while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
     cout << "I got out\n";
-    if(event->type == sf::Event::Closed)return nullptr;
-    if(event->type == sf::Event::KeyPressed)
-    {input = to_string(char(event->key.code-26));
-        cout << event->key.code <<'\n';}
+    //if(event->type == sf::Event::Closed)return nullptr;
+    //if(event->type == sf::Event::KeyPressed)
+   // {input = to_string(char(event->key.code-26));
+   //     cout << event->key.code <<'\n';}
+   cout << input << " entered\n";
     if(input == "1"){
         //Wolfram
+        cout << "I AM HERE NIGGA\n";
         return new WolframVisualMenu();
     }
     if(input == "2"){
@@ -370,20 +479,23 @@ Menu* Visualization::TakeInput(sf::RenderWindow* window,sf::Event* event) {
         //Back
         return new Main();
     }
-    return new Visualization();
+    if(input == "exit")
+        return nullptr;
 
+    return new Visualization();
 
 }
 
 Menu* Fractal::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
     cout << "I am here\n";
-    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-    cout << "I got out\n";
-    if(event->type == sf::Event::Closed)return nullptr;
-    if(event->type == sf::Event::KeyPressed)
-    {input = to_string(char(event->key.code-26));
-        cout << event->key.code <<'\n';}
+    ReadFromKeyBoard(&input,window,event,this);
+//    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+//    cout << "I got out\n";
+//    if(event->type == sf::Event::Closed)return nullptr;
+//    if(event->type == sf::Event::KeyPressed)
+//    {input = to_string(char(event->key.code-26));
+//        cout << event->key.code <<'\n';}
     if(input == "1"){
         //Wolfram
         return new Fractal();
@@ -396,6 +508,9 @@ Menu* Fractal::TakeInput(sf::RenderWindow* window,sf::Event* event) {
         //Back
         return new Main();
     }
+    if(input == "exit")
+        return nullptr;
+
     return new Fractal();
 
 }
@@ -403,12 +518,13 @@ Menu* Fractal::TakeInput(sf::RenderWindow* window,sf::Event* event) {
 Menu* Cryptography::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
     cout << "I am here\n";
-    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-    cout << "I got out\n";
-    if(event->type == sf::Event::Closed)return nullptr;
-    if(event->type == sf::Event::KeyPressed)
-    {input = to_string(char(event->key.code-26));
-        cout << event->key.code <<'\n';}
+    ReadFromKeyBoard(&input,window,event,this);
+    //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
+//    cout << "I got out\n";
+//    if(event->type == sf::Event::Closed)return nullptr;
+//    if(event->type == sf::Event::KeyPressed)
+//    {input = to_string(char(event->key.code-26));
+//        cout << event->key.code <<'\n';}
     if(input == "1"){
         //Image
         return new Cryptography();
@@ -421,6 +537,9 @@ Menu* Cryptography::TakeInput(sf::RenderWindow* window,sf::Event* event) {
         //Back
         return new Main();
     }
+    if(input == "exit")
+        return nullptr;
+
     return new Cryptography();
 
 }

@@ -133,6 +133,7 @@ add_executable(${PROJECT_NAME}
         ElementaryRule.cpp
         Menu.h
         Menu.cpp
+        MyTools.cpp
 )
 
 ###############################################################################
