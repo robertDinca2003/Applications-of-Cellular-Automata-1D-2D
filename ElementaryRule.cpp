@@ -109,6 +109,15 @@ int ElementaryRule::getRuleNumber() const {
 int ElementaryRule::getCurrGenNumber() const{
     return this->nrCurrGen;
 }
+int ElementaryRule::getMaxDepth() const {
+    return this->maxDepth;
+}
+int ElementaryRule::getMaxLength() const {
+    return this->maxLength;
+}
+int ElementaryRule::getElement(int generation, int position) const {
+    return this->allGenerations[generation][position];
+}
 vector<int> ElementaryRule::getCurrGeneration() const{
     return this->currGen;
 }

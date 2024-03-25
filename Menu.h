@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include "ElementaryRule.h"
+#include "ConwaysGameOfLife.h"
 #include <SFML/Graphics.hpp>
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
     virtual void DisplayContent() const = 0;
     virtual void DisplayScreen(sf::RenderWindow*) = 0;
     virtual Menu* TakeInput(sf::RenderWindow*,sf::Event*) = 0 ;
-    friend void ReadFromKeyBoard(string*,sf::RenderWindow*,sf::Event*,Menu*);
+    friend void ReadFromKeyBoard(string*,sf::RenderWindow*,sf::Event*,Menu*,int);
     Menu(){
         cout << "Constructed Menu\n";
     };
@@ -66,7 +67,20 @@ public:
     explicit WolframVisualMenu(int state = 0, int ruleNumber = 255, int maxDepth = 30, int maxLength = 50, ElementaryRule*ruleSet = new ElementaryRule(255,30,50));
     void DisplayScreen(sf::RenderWindow*) override;
     void DisplayContent() const override;
-    friend void ReadFromKeyBoard(string*,sf::RenderWindow*,sf::Event*,Menu*);
+    friend void ReadFromKeyBoard(string*,sf::RenderWindow*,sf::Event*,Menu*,int);
+    Menu* TakeInput(sf::RenderWindow*,sf::Event*) override;
+};
+
+class ConwaysVisualMenu: public Menu{
+private:
+    int state;
+    string input;
+    ConwaysGameOfLife *game;
+public:
+    explicit  ConwaysVisualMenu();
+    explicit ConwaysVisualMenu(int,ConwaysGameOfLife*);
+    void DisplayScreen(sf::RenderWindow*) override;
+    void DisplayContent() const override;
     Menu* TakeInput(sf::RenderWindow*,sf::Event*) override;
 };
 

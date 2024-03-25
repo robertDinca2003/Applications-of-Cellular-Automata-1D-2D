@@ -37,8 +37,12 @@ public:
     // Getters
     [[nodiscard]] int getRuleNumber() const;
     [[nodiscard]] int getCurrGenNumber() const;
+    [[nodiscard]] int getMaxDepth() const;
+    [[nodiscard]] int getMaxLength() const;
+    [[nodiscard]] int getElement(int,int) const;
     [[nodiscard]] vector<int> getCurrGeneration() const;
     [[nodiscard]] vector<int> getStartGen() const;
+
 
     // Setters
     void setMaxDepth(int);

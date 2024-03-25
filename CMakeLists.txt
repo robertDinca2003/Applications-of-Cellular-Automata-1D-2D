@@ -134,6 +134,10 @@ add_executable(${PROJECT_NAME}
         Menu.h
         Menu.cpp
         MyTools.cpp
+        ConwaysGameOfLife.h
+        ConwaysGameOfLife.h
+        ConwaysGameOfLife.cpp
+        ConwaysGameOfLife.cpp
 )
 
 ###############################################################################

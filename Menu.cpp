@@ -6,7 +6,31 @@
 #include "Menu.h"
 
 
-void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event, Menu* men){
+void DisplayBufferContent(ElementaryRule *ruleSet, sf::RenderWindow *window){
+
+    int height = ruleSet->getMaxDepth();
+    int length = ruleSet->getMaxLength();
+    int currHeight = ruleSet->getCurrGenNumber();
+    float pixelSize = min(1100.f/length, 435.f/height);
+    float startX = (1180 - pixelSize*length)/2.f;
+    float startY = 100.f;
+
+    sf::RectangleShape pixel(sf::Vector2f(pixelSize,pixelSize));
+
+    for(int i = 0; i < height; i++)
+        for(int j = 0; j < length; j++)
+        {
+            pixel.setPosition(startX+j*pixelSize,startY+i*pixelSize);
+            if(ruleSet->getElement(i,j) == 1 && i <= currHeight)
+                pixel.setFillColor(sf::Color::Blue);
+            else
+                pixel.setFillColor(sf::Color::White);
+            window->draw(pixel);
+        }
+    window->display();
+}
+
+void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event, Menu* men, int maxim){
     int temp = 0;
     bool ok = false;
     string inputMes;
@@ -35,7 +59,7 @@ void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event,
                 //cout << event->key.code <<'\n';
                 if(int(event->text.unicode) >=48 && int(event->text.unicode) <58)
                 {   temp = temp * 10 + static_cast<int>(event->text.unicode) - 48;
-                    if(temp > 5000) temp = 5000;
+                    if(temp > maxim) temp = maxim;
                     cout << temp << '\n';
                     inputMes= "Insert: "+ to_string(temp);
                     text.setString(inputMes);
@@ -87,6 +111,18 @@ WolframVisualMenu::WolframVisualMenu(int state , int ruleNumber , int maxDepth ,
     this->maxLength = maxLength;
     this->input = "0";
     this->ruleSet = ruleSet;
+}
+ConwaysVisualMenu::ConwaysVisualMenu(int state, ConwaysGameOfLife *game)
+{
+    this->state = state;
+    this->game = game;
+    this->input = "";
+}
+ConwaysVisualMenu::ConwaysVisualMenu()
+{
+    this->state = 0;
+    this->game = new ConwaysGameOfLife();
+    this->input = "";
 }
 
 void Main::DisplayContent() const{
@@ -142,9 +178,23 @@ void WolframVisualMenu::DisplayContent() const{
         cout << "5. Back\n";
 
         cout << this->ruleSet->getCurrGenNumber()<<'\n';
-        ruleSet->DisplayCurrentGeneration();
+        //ruleSet->DisplayCurrentGeneration();
         cout << '\n';
-        ruleSet->DisplayUpToCurrentGeneration();
+        //ruleSet->DisplayUpToCurrentGeneration();
+    }
+}
+void ConwaysVisualMenu::DisplayContent() const {
+    if(this->state == 0){
+        cout << "<--- Game of Life Visualization --->\n";
+        cout << "1. Number of initial cells: " << this->game->getInitNrCells() << "\n";
+        cout << "2. Use Preset\n";
+        cout << "3. Generate\n";
+        cout << "4. Back\n";
+    }
+    if(this->state == 1)
+    {
+        cout <<"<--- Game of Life Visualization --->\n";
+        cout <<"1. Stop\n 2. Back\n";
     }
 }
 
@@ -309,6 +359,38 @@ void WolframVisualMenu::DisplayScreen(sf::RenderWindow* window) {
 
     window->clear(sf::Color::White);
     window->draw(text);
+    if(this->state == 1)
+        DisplayBufferContent(this->ruleSet, window);
+    else
+        window->display();
+
+}
+
+void ConwaysVisualMenu::DisplayScreen(sf::RenderWindow *window) {
+    vector<string> content(8);
+    content[0] = "<--- Game of Life Visualization --->";
+    content[1] = "1. Number of initial cells: " + to_string(this->game->getInitNrCells()) ;
+    content[2] = "2. Use Preset\n";
+    content[3] = "3. Generate\n";
+    content[4] = "4. Back\n";
+    content[5] = "<--- Game of Life Visualization --->\n";
+    content[6] = "1. Stop\n";
+    content[7] = "2. Back\n";
+
+    sf::Text text;
+    sf::Font font;
+    font.loadFromFile("myfont.ttf");
+
+    text.setFont(font);
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::Blue);
+
+    if(this->state == 0)
+        for(int i = 0; i<5;i++)
+        {text.setString(content[i]);window->draw(text);}
+    else
+        for(int i = 5; i<8;i++)
+        {text.setString(content[i]);window->draw(text);}
     window->display();
 }
 
@@ -319,7 +401,7 @@ Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
 //    cout << "I got out\n";
 //    if(event->type == sf::Event::Closed)return nullptr;
 //    if(event->type == sf::Event::KeyPressed)input = event->key.code-26;
-    ReadFromKeyBoard(&input,window,event,this);
+    ReadFromKeyBoard(&input,window,event,this,10);
 
     int rNum = this->ruleNumber;
     int mLen = this->maxLength;
@@ -344,72 +426,83 @@ Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
         this->DisplayScreen(window);
         window->draw(text);
 
+        if(input != "exit")
+        {
+            switch (stoi(input)) {
+                case 1:
+                    cout << "Insert new rule number: ";
+                    ReadFromKeyBoard(&temp,window,event,this,255);
+                    cout << temp<<'\n';
+                    if(temp == "exit")return nullptr;
+                    rNum = stoi(temp);
+                    break;
+                case 2:
+                    cout << "Insert new maximum length: ";
+                    ReadFromKeyBoard(&temp,window,event,this,1100);
+                    if(temp == "exit")return nullptr;
+                    mLen = stoi(temp);
+                    break;
+                case 3:
+                    cout << "Insert new maximum depth: ";
+                    //window->pollEvent(*event);
+                    ReadFromKeyBoard(&temp,window,event,this,435);
 
-        switch (stoi(input)) {
-            case 1:
-                cout << "Insert new rule number: ";
-                ReadFromKeyBoard(&temp,window,event,this);
-                cout << temp<<'\n';
-                if(temp == "exit")return nullptr;
-                rNum = stoi(temp);
-                break;
-            case 2:
-                cout << "Insert new maximum length: ";
-                ReadFromKeyBoard(&temp,window,event,this);
-                if(temp == "exit")return nullptr;
-                mLen = stoi(temp);
-                break;
-            case 3:
-                cout << "Insert new maximum depth: ";
-                //window->pollEvent(*event);
-                ReadFromKeyBoard(&temp,window,event,this);
-
-                if(temp == "exit")return nullptr;
-                mDep = stoi(temp);
-                if(mDep >5000)
-                    mDep = 5000;
-                if(mDep == 0)
-                    mDep = 1;
-                break;
-            case 4:
-                cState = 1;
-                //runWolframVisualization(rNum,mLen,mDep);
-                break;
-            case 5:
-                delete this->ruleSet;
-                return new Visualization();
+                    if(temp == "exit")return nullptr;
+                    mDep = stoi(temp);
+                    if(mDep == 0)
+                        mDep = 1;
+                    break;
+                case 4:
+                    cState = 1;
+                    //runWolframVisualization(rNum,mLen,mDep);
+                    break;
+                case 5:
+                    delete this->ruleSet;
+                    return new Visualization();
+            }
         }
+        else{
+            return nullptr;
+        }
+
         delete this->ruleSet;
         return new WolframVisualMenu(cState,rNum,mDep,mLen, new ElementaryRule(rNum,mLen,mDep));
     }
     if(this->state == 1)
     {
-        switch (stoi(input)) {
-            case 1:
-                ruleSet->CreateNextGen();
-                cout << ruleSet->getCurrGenNumber()<< '\n';
-                cout << "Next Generation\n";
-                break;
-            case 2:
-                if(ruleSet->getCurrGenNumber() > 0)
-                    ruleSet->UpdateCurrGeneration(ruleSet->getCurrGenNumber()-1);
-                break;
-            case 3:
-            {string tempInput;
-                cout << "\nInput the generation number:";
-                ReadFromKeyBoard(&tempInput,window,event,this);
-                ruleSet->UpdateCurrGeneration(stoi(tempInput));
-                break;}
-            case 4:
-                ruleSet->GenerateToMaxDepth();
-                break;
-            case 5:
+        if(input != "exit")
+        {
+            switch (stoi(input)) {
+                case 1:
+                    ruleSet->CreateNextGen();
+                    cout << ruleSet->getCurrGenNumber()<< '\n';
+                    cout << "Next Generation\n";
+                    break;
+                case 2:
+                    if(ruleSet->getCurrGenNumber() > 0)
+                        ruleSet->UpdateCurrGeneration(ruleSet->getCurrGenNumber()-1);
+                    break;
+                case 3:
+                {string tempInput;
+                    cout << "\nInput the generation number:";
+                    ReadFromKeyBoard(&tempInput,window,event,this,this->ruleSet->getMaxDepth());
+                    ruleSet->UpdateCurrGeneration(stoi(tempInput));
+                    break;}
+                case 4:
+                    ruleSet->GenerateToMaxDepth();
+                    break;
+                case 5:
 
-                cState = 0;
-                break;
-            default:
-                break;
+                    cState = 0;
+                    break;
+                default:
+                    break;
+            }
         }
+        else{
+            return nullptr;
+        }
+
 
         return new WolframVisualMenu(cState,rNum,mDep,mLen, this->ruleSet);
     }
@@ -417,9 +510,42 @@ Menu* WolframVisualMenu::TakeInput(sf::RenderWindow* window,sf::Event* event){
     return new WolframVisualMenu();
 }
 
+Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
+    cout << "Current input: ";
+    ReadFromKeyBoard(&input,window,event, this, 10);
+
+    string temp;
+    int newInitialCells =0;
+    bool preset = false;
+    int newState = 0;
+
+    if(this->state == 0)
+    {
+        if (input != "exit") {
+            if (input == "1") {
+                cout << "Insert new initial cells number\n";
+                ReadFromKeyBoard(&temp, window, event, this, 10000);
+                if (temp == "exit")return nullptr;
+                newInitialCells = stoi(temp);
+            } else if (input == "2") {
+                preset = !preset;
+            } else if (input == "3") {
+                newState = 1;
+            } else if (input == "4") {
+                delete this->game;
+                return new Visualization();
+            }
+
+        } else
+            return nullptr;
+
+    }
+
+}
+
 Menu* Main::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
-    ReadFromKeyBoard(&input,window,event,this);
+    ReadFromKeyBoard(&input,window,event,this,100);
     cout << "I am here\n";
 //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
     cout << "I got out\n";
@@ -449,7 +575,7 @@ Menu* Main::TakeInput(sf::RenderWindow* window,sf::Event* event) {
 
 Menu* Visualization::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
-    ReadFromKeyBoard(&input,window,event,this);
+    ReadFromKeyBoard(&input,window,event,this,100);
     cout << "I am here\n";
     //while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
     cout << "I got out\n";
@@ -465,7 +591,7 @@ Menu* Visualization::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     }
     if(input == "2"){
         //Conways
-        return new Visualization();
+        return new ConwaysVisualMenu();
     }
     if(input == "3"){
         //Belousov
@@ -489,7 +615,7 @@ Menu* Visualization::TakeInput(sf::RenderWindow* window,sf::Event* event) {
 Menu* Fractal::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
     cout << "I am here\n";
-    ReadFromKeyBoard(&input,window,event,this);
+    ReadFromKeyBoard(&input,window,event,this,100);
 //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
 //    cout << "I got out\n";
 //    if(event->type == sf::Event::Closed)return nullptr;
@@ -518,7 +644,7 @@ Menu* Fractal::TakeInput(sf::RenderWindow* window,sf::Event* event) {
 Menu* Cryptography::TakeInput(sf::RenderWindow* window,sf::Event* event) {
     string input;
     cout << "I am here\n";
-    ReadFromKeyBoard(&input,window,event,this);
+    ReadFromKeyBoard(&input,window,event,this,100);
     //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
 //    cout << "I got out\n";
 //    if(event->type == sf::Event::Closed)return nullptr;
