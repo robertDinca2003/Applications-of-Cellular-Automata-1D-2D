@@ -22,22 +22,22 @@
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-void runGame(Menu* current, sf::RenderWindow *window, sf::Event *event){
+void runGame(Menu *current, sf::RenderWindow *window, sf::Event *event) {
 
     while (window->isOpen())
         while (window->pollEvent(*event)) {
             if (event->type == sf::Event::Closed)
                 window->close();
-            if (current == nullptr)
-            {   window->close();
-                return;}
-            else {
+            if (current == nullptr) {
+                window->close();
+                return;
+            } else {
 
 
                 cout << *current;
                 current->DisplayScreen(window);
                 current->DisplayContent();
-                Menu *next = current->TakeInput(window,event);
+                Menu *next = current->TakeInput(window, event);
                 delete current;
                 runGame(next, window, event);
             }
@@ -68,25 +68,25 @@ int main() {
     rule30.MultipleGeneration(25);
     rule30.DisplayUpToCurrentGeneration();
     rule30.DisplayAll();
-    cout << '\n' << rule30.getCurrGenNumber() << ' ' << rule30.getRuleNumber()<<'\n';
-    for(int x : rule30.getCurrGeneration())
+    cout << '\n' << rule30.getCurrGenNumber() << ' ' << rule30.getRuleNumber() << '\n';
+    for (int x: rule30.getCurrGeneration())
         cout << x << ' ';
     cout << '\n';
-    for(int x : rule30.getStartGen())
+    for (int x: rule30.getStartGen())
         cout << x << ' ';
     cout << '\n';
-    cout << rule30<<'\n';
+    cout << rule30 << '\n';
     rule30.setMaxDepth(50);
     rule30.setMaxLength(100);
-    cout << rule30<<'\n';
+    cout << rule30 << '\n';
     ElementaryRule copyRule = rule30;
     cout << copyRule << '\n';
 
-    sf::RenderWindow window(sf::VideoMode(1200,600),"SFML Window");
+    sf::RenderWindow window(sf::VideoMode(1200, 600), "SFML Window");
     window.setFramerateLimit(60);
     sf::Event event;
     sf::Font font;
-    if(!font.loadFromFile("myfont.ttf"))
+    if (!font.loadFromFile("myfont.ttf"))
         return EXIT_FAILURE;
 
     sf::Text text;
@@ -94,17 +94,17 @@ int main() {
     text.setString("Cellular Automata");
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::Blue);
-    text.setPosition(400.f,250.f);
+    text.setPosition(400.f, 250.f);
 
     window.clear(sf::Color::White);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
-    shape.setPosition(500,200);
+    shape.setPosition(500, 200);
     window.draw(shape);
     window.draw(text);
     window.display();
 
-    runGame(new Main(),&window,&event);
+    runGame(new Main(), &window, &event);
 
 
 

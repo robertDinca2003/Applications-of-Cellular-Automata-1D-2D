@@ -7,23 +7,36 @@
 
 #include<SFML/Graphics.hpp>
 
-class ConwaysGameOfLife{
+class ConwaysGameOfLife {
 private:
     int matrix[502][1102];
     int copyMat[502][1102];
     int initialNumberCells;
     int currentGen;
 
+    int height;
+    int length;
+
 public:
     ConwaysGameOfLife();
-    ConwaysGameOfLife(int);
+
+    ConwaysGameOfLife(int, int, int);
+
     ConwaysGameOfLife(int mat[502][1102]);
+
     ~ConwaysGameOfLife();
 
     int getInitNrCells() const;
 
+    int getHeight() const;
+
+    int getLength() const;
+
+    void setInitNrCells(int);
+
     void CreateNextGeneration();
-    void DisplayGameOfLife(sf::RenderWindow*);
+
+    void DisplayGameOfLife(sf::RenderWindow *);
 };
 
 
