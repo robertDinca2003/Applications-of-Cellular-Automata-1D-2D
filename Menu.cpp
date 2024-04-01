@@ -120,7 +120,8 @@ ConwaysVisualMenu::ConwaysVisualMenu(int state, bool preset, ConwaysGameOfLife *
 
 ConwaysVisualMenu::ConwaysVisualMenu() {
     this->state = 0;
-    this->game = new ConwaysGameOfLife();
+    ConwaysGameOfLife *temp = new ConwaysGameOfLife();
+    this->game = temp;
     this->input = "";
     this->preset = false;
 }
