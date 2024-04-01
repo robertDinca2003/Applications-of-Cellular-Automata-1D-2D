@@ -10,6 +10,17 @@
 
 using namespace std;
 
+
+/// @brief An elementary rule is an 1D automaton, that means a generation is represent by a vector(1D array). Every elementary rule has it's own rule set for creating the next generation. The number of every rule represent the rule set written in a shorter way by the binary representation of the number
+/// @param ruleNumber The identifier for every rule
+/// @param maxLength The maximum length of a generation
+/// @param maxDepth The maximum number of generations which can be created
+/// @param nrCurrGen The current generation number
+/// @param maxGenerated In term of generation numbers, the biggest of them which was generated (<= maxDepth)
+/// @param ruleCode It is a vector containing the rules of every generation
+/// @param startGen The initial generation
+/// @param currGen The current generation
+/// @param allGenerations All generation which can be accessed by index of every generation
 class ElementaryRule {
 private:
     int ruleNumber;
@@ -23,33 +34,38 @@ private:
     vector<vector<int>> allGenerations;
 public:
     // Constructors
+    /// @brief Constructor based on a specific rule identifier, length and depth
     explicit ElementaryRule(int ruleNumber = 90, int maxLength = 50, int maxDepth = 30, vector<int> startGen = {-1});
 
+    /// @brief Copy constructor
     ElementaryRule(const ElementaryRule &);
 
     // Deconstructors
+    /// @brief Deconstruct
     ~ElementaryRule();
 
     // cout <<
+    /// @brief operator<<
     friend ostream &operator<<(ostream &, const ElementaryRule &);
 
     // operator=
+    /// @brief operator=
     ElementaryRule &operator=(const ElementaryRule &);
 
     // Getters
-    [[nodiscard]] int getRuleNumber() const;
+    int getRuleNumber() const;
 
-    [[nodiscard]] int getCurrGenNumber() const;
+    int getCurrGenNumber() const;
 
-    [[nodiscard]] int getMaxDepth() const;
+    int getMaxDepth() const;
 
-    [[nodiscard]] int getMaxLength() const;
+    int getMaxLength() const;
 
-    [[nodiscard]] int getElement(int, int) const;
+    int getElement(int, int) const;
 
-    [[nodiscard]] vector<int> getCurrGeneration() const;
+    vector<int> getCurrGeneration() const;
 
-    [[nodiscard]] vector<int> getStartGen() const;
+    vector<int> getStartGen() const;
 
 
     // Setters
@@ -58,16 +74,22 @@ public:
     void setMaxLength(int);
 
     // Main Functionality
+    /// @brief CreateNextGen() - Used for creating the next generation based on the current one
     void CreateNextGen();
 
+    /// @brief Used to generate multiple generation, it is based on CreateNextGen()
     void MultipleGeneration(int);
 
+    /// @brief Used for displaying the current generation
     void DisplayCurrentGeneration() const;
 
+    /// @brief Used to display all generation from 0 to nrCurrGen
     void DisplayUpToCurrentGeneration() const;
 
+    /// @brief It is used to go to a given generation by the parameter number
     void UpdateCurrGeneration(int);
 
+    /// @brief It is used to create all generations
     void GenerateToMaxDepth();
 
     void DisplayAll();

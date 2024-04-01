@@ -14,23 +14,29 @@
 
 using namespace std;
 
+/// @brief Menu is a class which is used for the navigation menu of the program
 class Menu {
 private:
 public:
+    /// @brief DisplayContent - used for displaying the current menu
     virtual void DisplayContent() const = 0;
 
     virtual void DisplayScreen(sf::RenderWindow *) = 0;
 
+    /// @brief TakeInput - used for taking the user input and process it
     virtual Menu *TakeInput(sf::RenderWindow *, sf::Event *) = 0;
 
+    /// @brief ReadFromKeyBoard - is a extern function of the class, used to read an input from the keyboard
     friend void ReadFromKeyBoard(string *, sf::RenderWindow *, sf::Event *, Menu *, int);
 
     Menu() {
         cout << "Constructed Menu\n";
     };
 
+    /// @brief Deconstruct
     virtual ~Menu() { cout << "Deconstructed Menu\n"; }
 
+    /// @brief operator<<
     friend ostream &operator<<(ostream &os, const Menu &menu) {
 
         menu.DisplayContent();
@@ -38,6 +44,7 @@ public:
     }
 };
 
+/// @brief Main - represent the main menu of the application
 class Main : public Menu {
 public:
     void DisplayContent() const override;
@@ -48,6 +55,7 @@ public:
 
 };
 
+/// @brief Visualization - represent a submenu in which are presented different ways to visualize automata
 class Visualization : public Menu {
     void DisplayContent() const override;
 
@@ -56,6 +64,7 @@ class Visualization : public Menu {
     Menu *TakeInput(sf::RenderWindow *, sf::Event *) override;
 };
 
+/// @brief Cryptography - represent a submenu, containing different ways to encrypt a photo or a text
 class Cryptography : public Menu {
     void DisplayContent() const override;
 
@@ -64,6 +73,7 @@ class Cryptography : public Menu {
     Menu *TakeInput(sf::RenderWindow *, sf::Event *) override;
 };
 
+/// @brief Fractal - represent a submenu, containing different types of fractals
 class Fractal : public Menu {
     void DisplayContent() const override;
 
@@ -72,6 +82,7 @@ class Fractal : public Menu {
     Menu *TakeInput(sf::RenderWindow *, sf::Event *) override;
 };
 
+/// @brief WolframVisualMenu - is a menu to preset the settings of a elementary rule which will be generated
 class WolframVisualMenu : public Menu {
 private:
     int state;
@@ -93,6 +104,7 @@ public:
     Menu *TakeInput(sf::RenderWindow *, sf::Event *) override;
 };
 
+/// @brief ConwaysVisualMenu - is a submenu used to make a the settings to generate a Conways' game of life
 class ConwaysVisualMenu : public Menu {
 private:
     int state;

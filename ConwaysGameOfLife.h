@@ -22,7 +22,11 @@ public:
 
     ConwaysGameOfLife(int, int, int);
 
-    ConwaysGameOfLife(int mat[502][1102]);
+    explicit ConwaysGameOfLife(int mat[502][1102]);
+
+    //ConwaysGameOfLife(const ConwaysGameOfLife &other);
+
+    ConwaysGameOfLife &operator=(const ConwaysGameOfLife &other);
 
     ~ConwaysGameOfLife();
 

@@ -49,6 +49,29 @@ ConwaysGameOfLife::ConwaysGameOfLife(int mat[502][1102]) {
     this->length = 500;
 }
 
+//ConwaysGameOfLife::ConwaysGameOfLife(const ConwaysGameOfLife &other) {
+//
+//    this->length = other.length;
+//    this->height = other.height;
+//    this->initialNumberCells = other.initialNumberCells;
+//    this->currentGen = other.currentGen;
+//    for(int i = 0 ; i<502;i++)
+//        for(int j = 0; j<1102; j++)
+//            this->matrix[i][j] = other.matrix[i][j], this->copyMat[i][j] = other.copyMat[i][j];
+//
+//}
+
+ConwaysGameOfLife& ConwaysGameOfLife::operator=(const ConwaysGameOfLife &other) {
+    this->length = other.length;
+    this->height = other.height;
+    this->initialNumberCells = other.initialNumberCells;
+    this->currentGen = other.currentGen;
+    for(int i = 0 ; i<502;i++)
+        for(int j = 0; j<1102; j++)
+            this->matrix[i][j] = other.matrix[i][j], this->copyMat[i][j] = other.copyMat[i][j];
+    return *this;
+}
+
 ConwaysGameOfLife::~ConwaysGameOfLife() {
     cout << "Deconstructed Game of Life\n";
 }
