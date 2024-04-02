@@ -10,6 +10,7 @@
 #include <string>
 #include "ElementaryRule.h"
 #include "ConwaysGameOfLife.h"
+#include "Belousov.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
@@ -121,6 +122,24 @@ public:
     void DisplayContent() const override;
 
     Menu *TakeInput(sf::RenderWindow *, sf::Event *) override;
+};
+
+class BelousovVisualMenu : public Menu{
+private:
+    int state;
+    string input;
+    Belousov *game;
+public:
+
+    explicit BelousovVisualMenu();
+
+    explicit BelousovVisualMenu(int,int,int,int,int);
+
+    void DisplayScreen(sf::RenderWindow *) override;
+
+    void DisplayContent() const override;
+
+    Menu *TakeInput(sf::RenderWindow*, sf::Event*) override;
 };
 
 #endif //OOP_MENU_H

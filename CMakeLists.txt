@@ -138,6 +138,8 @@ add_executable(${PROJECT_NAME}
         ConwaysGameOfLife.h
         ConwaysGameOfLife.cpp
         ConwaysGameOfLife.cpp
+        Belousov.h
+        Belousov.cpp
 )
 
 ###############################################################################
