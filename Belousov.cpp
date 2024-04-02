@@ -102,9 +102,7 @@ void Belousov::DisplayBelousov(sf::RenderWindow *window) {
             }
             else
             {
-                float col = 0.f;
-                if(i <500 && j < 500)
-                    col = this->currMat[i][j];
+                float col = this->currMat[i][j];
 
                 pixel.setFillColor(sf::Color(col, col, col));
             }
