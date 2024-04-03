@@ -7,6 +7,7 @@
 
 #include "Menu.h"
 #include "Visualization.h"
+#include "ElementaryRule.h"
 
 /// @brief WolframVisualMenu - is a menu to preset the settings of a elementary rule which will be generated
 class WolframVisualMenu : public Menu {

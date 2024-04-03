@@ -7,6 +7,7 @@
 
 #include "Menu.h"
 #include "Visualization.h"
+#include "Belousov.h"
 
 class BelousovVisualMenu : public Menu {
 private:

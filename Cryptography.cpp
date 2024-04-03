@@ -3,7 +3,7 @@
 //
 
 #include "Cryptography.h"
-#include "Main.h"
+#include "NewMain.h"
 
 
 void Cryptography::DisplayContent() const {

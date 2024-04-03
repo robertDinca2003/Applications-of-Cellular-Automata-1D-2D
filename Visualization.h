@@ -6,7 +6,7 @@
 #define OOP_VISUALIZATION_H
 
 #include "Menu.h"
-#include "Main.h"
+#include "NewMain.h"
 #include "WolframVisualMenu.h"
 #include "ConwaysVisualMenu.h"
 #include "BelousovVisualMenu.h"

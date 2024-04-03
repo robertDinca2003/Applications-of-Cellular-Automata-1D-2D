@@ -6,7 +6,7 @@
 #define OOP_FRACTALS_H
 
 #include "Menu.h"
-#include "Main.h"
+#include "NewMain.h"
 
 /// @brief Fractal - represent a submenu, containing different types of fractals
 class Fractal : public Menu {

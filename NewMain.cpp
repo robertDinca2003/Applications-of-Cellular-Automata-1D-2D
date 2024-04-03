@@ -2,7 +2,7 @@
 // Created by robert on 03.04.2024.
 //
 
-#include "Main.h"
+#include "NewMain.h"
 
 
 void Main::DisplayContent() const {

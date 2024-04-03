@@ -7,6 +7,7 @@
 
 #include "Menu.h"
 #include "Visualization.h"
+#include "ConwaysGameOfLife.h"
 
 
 /// @brief ConwaysVisualMenu - is a submenu used to make a the settings to generate a Conways' game of life

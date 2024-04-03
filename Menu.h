@@ -8,9 +8,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "ElementaryRule.h"
-#include "ConwaysGameOfLife.h"
-#include "Belousov.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;

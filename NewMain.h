@@ -2,8 +2,8 @@
 // Created by robert on 03.04.2024.
 //
 
-#ifndef OOP_MAIN_H
-#define OOP_MAIN_H
+#ifndef OOP_NEWMAIN_H
+#define OOP_NEWMAIN_H
 
 #include "Menu.h"
 #include "Visualization.h"
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //OOP_MAIN_H
+#endif //OOP_NEWMAIN_H

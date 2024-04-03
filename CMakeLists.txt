@@ -146,8 +146,8 @@ add_executable(${PROJECT_NAME}
         Cryptography.cpp
         Fractals.h
         Fractals.cpp
-        Main.h
-        Main.cpp
+        NewMain.h
+        NewMain.cpp
         WolframVisualMenu.h
         WolframVisualMenu.cpp
         ConwaysVisualMenu.h
