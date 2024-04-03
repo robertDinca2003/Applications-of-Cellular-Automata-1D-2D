@@ -35,13 +35,13 @@ ConwaysGameOfLife::ConwaysGameOfLife(int initialNumberCells, int height, int len
 }
 
 ConwaysGameOfLife::ConwaysGameOfLife(int mat[502][1102]) {
-    int initCellNumber = 0 ;
+    int initCellNumber = 0;
     cout << "Constructed Game of Life\n";
     for (int i = 0; i < 502; i++)
         for (int j = 0; j < 1102; j++) {
             this->matrix[i][j] = mat[i][j];
             this->copyMat[i][j] = 0;
-            initCellNumber+=mat[i][j];
+            initCellNumber += mat[i][j];
         }
     this->initialNumberCells = initCellNumber;
     this->currentGen = 0;
@@ -55,19 +55,19 @@ ConwaysGameOfLife::ConwaysGameOfLife(const ConwaysGameOfLife &other) {
     this->height = other.height;
     this->initialNumberCells = other.initialNumberCells;
     this->currentGen = other.currentGen;
-    for(int i = 0 ; i<502;i++)
-        for(int j = 0; j<1102; j++)
+    for (int i = 0; i < 502; i++)
+        for (int j = 0; j < 1102; j++)
             this->matrix[i][j] = other.matrix[i][j], this->copyMat[i][j] = other.copyMat[i][j];
 
 }
 
-ConwaysGameOfLife& ConwaysGameOfLife::operator=(const ConwaysGameOfLife &other) {
+ConwaysGameOfLife &ConwaysGameOfLife::operator=(const ConwaysGameOfLife &other) {
     this->length = other.length;
     this->height = other.height;
     this->initialNumberCells = other.initialNumberCells;
     this->currentGen = other.currentGen;
-    for(int i = 0 ; i<502;i++)
-        for(int j = 0; j<1102; j++)
+    for (int i = 0; i < 502; i++)
+        for (int j = 0; j < 1102; j++)
             this->matrix[i][j] = other.matrix[i][j], this->copyMat[i][j] = other.copyMat[i][j];
     return *this;
 }

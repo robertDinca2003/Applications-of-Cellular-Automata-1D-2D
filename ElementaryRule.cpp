@@ -3,8 +3,8 @@
 //
 #include "ElementaryRule.h"
 
-ElementaryRule::ElementaryRule(int ruleNumber , int maxLength , int maxDepth, vector<int> startGen) {
-         // Initialize integer variables
+ElementaryRule::ElementaryRule(int ruleNumber, int maxLength, int maxDepth, vector<int> startGen) {
+    // Initialize integer variables
     this->ruleNumber = ruleNumber;
     this->maxLength = maxLength;
     this->maxDepth = maxDepth;
@@ -13,8 +13,7 @@ ElementaryRule::ElementaryRule(int ruleNumber , int maxLength , int maxDepth, ve
 
     //Generate Rule Set
     int tempNumber = this->ruleNumber;
-    for(int i = 0; i<8; i++)
-    {
+    for (int i = 0; i < 8; i++) {
         ruleCod[i] = tempNumber & 1;
         tempNumber = tempNumber >> 1;
 
@@ -25,38 +24,41 @@ ElementaryRule::ElementaryRule(int ruleNumber , int maxLength , int maxDepth, ve
     this->currGen.resize(maxLength);
 
     this->startGen.resize(maxLength);
-    for(int i = 0 ; i<maxLength; i++)
+    for (int i = 0; i < maxLength; i++)
         this->startGen[i] = 0;
-    if(startGen.size() == 1 && startGen[0] == -1)
-        this->startGen[maxLength/2] = 1;
-    else for(int i = 0 ; i<maxLength; i++)
+    if (startGen.size() == 1 && startGen[0] == -1)
+        this->startGen[maxLength / 2] = 1;
+    else
+        for (int i = 0; i < maxLength; i++)
             this->startGen[i] = startGen[i];
 
     allGenerations.resize(maxDepth);
-    for(int i = 0 ; i<maxDepth;i++)
+    for (int i = 0; i < maxDepth; i++)
         allGenerations[i].resize(maxLength);
-    for(int i = 0; i<maxLength;i++)
+    for (int i = 0; i < maxLength; i++)
         allGenerations[0][i] = this->startGen[i], currGen[i] = this->startGen[i];
     cout << "Constructed Elementary Rule\n";
 }
 
-ElementaryRule::ElementaryRule(const ElementaryRule &other):ruleNumber(other.ruleNumber),maxLength(other.maxLength),maxDepth(other.maxDepth),nrCurrGen(other.nrCurrGen),maxGenerated(other.maxGenerated){
+ElementaryRule::ElementaryRule(const ElementaryRule &other) : ruleNumber(other.ruleNumber), maxLength(other.maxLength),
+                                                              maxDepth(other.maxDepth), nrCurrGen(other.nrCurrGen),
+                                                              maxGenerated(other.maxGenerated) {
     cout << "I am starting from here\n";
-    for(int i = 0 ; i < 8 ; i++)
+    for (int i = 0; i < 8; i++)
         this->ruleCod[i] = other.ruleCod[i];
     this->startGen.resize(other.startGen.size());
-    for(size_t i = 0 ; i<other.startGen.size(); i++)
+    for (size_t i = 0; i < other.startGen.size(); i++)
         this->startGen[i] = other.startGen[i];
     this->allGenerations.resize(other.maxDepth);
     cout << "I am here 1\n";
-    for(size_t i = 0 ; i<allGenerations.size(); i++)
+    for (size_t i = 0; i < allGenerations.size(); i++)
         this->allGenerations[i].resize(maxLength);
 
-    for(size_t i = 0 ; i<allGenerations.size(); i++)
-        for(int j = 0 ; j<maxLength;j++)
+    for (size_t i = 0; i < allGenerations.size(); i++)
+        for (int j = 0; j < maxLength; j++)
             this->allGenerations[i][j] = other.allGenerations[i][j];
     this->currGen.resize(maxLength);
-    for(int i = 0 ; i < maxLength; i++)
+    for (int i = 0; i < maxLength; i++)
         this->currGen[i] = other.allGenerations[other.nrCurrGen][i];
     cout << "I am here 2\n";
 
@@ -73,9 +75,9 @@ ostream &operator<<(ostream &os, const ElementaryRule &rule) {
 }
 
 
-ElementaryRule& ElementaryRule::operator=(const ElementaryRule &other){
+ElementaryRule &ElementaryRule::operator=(const ElementaryRule &other) {
     cout << "Stating\n";
-    if(this == &other)
+    if (this == &other)
         return *this;
     cout << "I am here 1\n";
     this->ruleNumber = other.ruleNumber;
@@ -84,20 +86,20 @@ ElementaryRule& ElementaryRule::operator=(const ElementaryRule &other){
     this->nrCurrGen = other.nrCurrGen;
     this->maxGenerated = other.maxGenerated;
     cout << "I am here 2\n";
-    for(int i = 0 ; i < 8 ; i++)
+    for (int i = 0; i < 8; i++)
         this->ruleCod[i] = other.ruleCod[i];
     this->startGen.resize(other.startGen.size());
-    for(size_t i = 0 ; i<other.startGen.size(); i++)
+    for (size_t i = 0; i < other.startGen.size(); i++)
         this->startGen[i] = other.startGen[i];
     this->allGenerations.resize(other.maxDepth);
     cout << "I am here 3\n";
-    for(size_t i = 0 ; i<allGenerations.size(); i++)
+    for (size_t i = 0; i < allGenerations.size(); i++)
         this->allGenerations[i].resize(maxLength);
-    for(size_t i = 0 ; i<allGenerations.size(); i++)
-        for(int j = 0 ; j<maxLength;j++)
+    for (size_t i = 0; i < allGenerations.size(); i++)
+        for (int j = 0; j < maxLength; j++)
             this->allGenerations[i][j] = other.allGenerations[i][j];
     this->currGen.resize(maxLength);
-    for(int i = 0 ; i < maxLength; i++)
+    for (int i = 0; i < maxLength; i++)
         this->currGen[i] = other.allGenerations[other.nrCurrGen][i];
 
     return *this;
@@ -106,28 +108,33 @@ ElementaryRule& ElementaryRule::operator=(const ElementaryRule &other){
 int ElementaryRule::getRuleNumber() const {
     return this->ruleNumber;
 }
-int ElementaryRule::getCurrGenNumber() const{
+
+int ElementaryRule::getCurrGenNumber() const {
     return this->nrCurrGen;
 }
+
 int ElementaryRule::getMaxDepth() const {
     return this->maxDepth;
 }
+
 int ElementaryRule::getMaxLength() const {
     return this->maxLength;
 }
+
 int ElementaryRule::getElement(int generation, int position) const {
     return this->allGenerations[generation][position];
 }
-vector<int> ElementaryRule::getCurrGeneration() const{
+
+vector<int> ElementaryRule::getCurrGeneration() const {
     return this->currGen;
 }
-vector<int> ElementaryRule::getStartGen() const{
+
+vector<int> ElementaryRule::getStartGen() const {
     return this->startGen;
 }
 
-void ElementaryRule::setMaxDepth(int newMaxDepth){
-    if(newMaxDepth < this->maxDepth)
-    {
+void ElementaryRule::setMaxDepth(int newMaxDepth) {
+    if (newMaxDepth < this->maxDepth) {
         //Throw Exception
         cout << "Can t decrease in depth\n";
         return;
@@ -136,30 +143,28 @@ void ElementaryRule::setMaxDepth(int newMaxDepth){
     this->allGenerations.resize(this->maxDepth);
 
 }
-void ElementaryRule::setMaxLength(int newMaxLength){
-    if(newMaxLength < this->maxLength)
-    {
+
+void ElementaryRule::setMaxLength(int newMaxLength) {
+    if (newMaxLength < this->maxLength) {
         //Throw Exception
         cout << "Cant decrease in length\n";
         return;
     }
     this->maxLength = newMaxLength;
     this->currGen.resize(this->maxLength);
-    for(int i = 0; i < maxDepth ; i++)
+    for (int i = 0; i < maxDepth; i++)
         allGenerations[i].resize(this->maxLength);
 
 }
 
-void ElementaryRule::CreateNextGen(){
-    if(nrCurrGen < maxGenerated)
-    {
+void ElementaryRule::CreateNextGen() {
+    if (nrCurrGen < maxGenerated) {
         nrCurrGen++;
-        for(int i = 0 ; i < maxLength; i++)
+        for (int i = 0; i < maxLength; i++)
             currGen[i] = allGenerations[nrCurrGen][i];
         return;
     }
-    if(nrCurrGen == maxDepth-1)
-    {
+    if (nrCurrGen == maxDepth - 1) {
         // Exception throw
         cout << "Max Size Reached";
         return;
@@ -170,35 +175,35 @@ void ElementaryRule::CreateNextGen(){
     for (int i = 0; i < maxLength; i++)
         temp[i] = currGen[(i - 1 + maxLength) % maxLength] * 4 + currGen[i] * 2 +
                   currGen[(i + maxLength + 1) % maxLength];
-    for(int i = 0 ; i < maxLength; i++)
+    for (int i = 0; i < maxLength; i++)
         currGen[i] = ruleCod[temp[i]], allGenerations[nrCurrGen][i] = currGen[i];
 
 }
-void ElementaryRule::MultipleGeneration(int depth){
-    if(depth >= maxDepth)
-    {
+
+void ElementaryRule::MultipleGeneration(int depth) {
+    if (depth >= maxDepth) {
         //Throw Exception
         return;
     }
-    if(depth < maxGenerated)
+    if (depth < maxGenerated)
         return;
-    for(int i = nrCurrGen; i < depth; i++)
+    for (int i = nrCurrGen; i < depth; i++)
         CreateNextGen();
 }
-void ElementaryRule::DisplayCurrentGeneration() const{
-    cout << "Current generation "<<nrCurrGen<<"\n";
-    for(int i = 0 ; i< maxLength; i++){
+
+void ElementaryRule::DisplayCurrentGeneration() const {
+    cout << "Current generation " << nrCurrGen << "\n";
+    for (int i = 0; i < maxLength; i++) {
         cout << currGen[i];
     }
     cout << "\n";
 }
+
 void ElementaryRule::DisplayUpToCurrentGeneration() const {
-    cout << "Generation from 0 to "<< nrCurrGen << ":\n";
-    for(int i = 0;i<=nrCurrGen; i++)
-    {
-        for(int j = 0 ; j< maxLength;j++)
-        {
-            if(allGenerations[i][j])
+    cout << "Generation from 0 to " << nrCurrGen << ":\n";
+    for (int i = 0; i <= nrCurrGen; i++) {
+        for (int j = 0; j < maxLength; j++) {
+            if (allGenerations[i][j])
                 cout << 0;
             else
                 cout << ' ';
@@ -206,28 +211,28 @@ void ElementaryRule::DisplayUpToCurrentGeneration() const {
         cout << '\n';
     }
 }
-void ElementaryRule::UpdateCurrGeneration(int number){
-    if(number < maxGenerated)
-    {
+
+void ElementaryRule::UpdateCurrGeneration(int number) {
+    if (number < maxGenerated) {
         this->nrCurrGen = number;
-        for(int i = 0 ; i< maxLength; i++)
-        {
+        for (int i = 0; i < maxLength; i++) {
             currGen[i] = allGenerations[nrCurrGen][i];
         }
     }
-    if(number > maxGenerated)
-    {
+    if (number > maxGenerated) {
         MultipleGeneration(number);
     }
 
 }
-void ElementaryRule::GenerateToMaxDepth(){
-    MultipleGeneration(maxDepth-1);
+
+void ElementaryRule::GenerateToMaxDepth() {
+    MultipleGeneration(maxDepth - 1);
 }
-void ElementaryRule::DisplayAll(){
-    if(maxGenerated < maxDepth-1)
+
+void ElementaryRule::DisplayAll() {
+    if (maxGenerated < maxDepth - 1)
         GenerateToMaxDepth();
-    UpdateCurrGeneration(maxDepth-1);
+    UpdateCurrGeneration(maxDepth - 1);
     DisplayUpToCurrentGeneration();
 
 }

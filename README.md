@@ -1,5 +1,19 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
-
+# Descriere
+Automatele celulare sunt modele matematice și computaționale simple, dar puternice, care sunt utilizate pentru a simula comportamente complexe în diverse domenii, cum ar fi știința computațională, fizica, biologia și lingvistica. Ele sunt compuse dintr-o grilă sau un set de celule, fiecare cu unul sau mai multe stări posibile, care evoluează în timp în funcție de un set de reguli simple. Fiecare celulă interacționează cu vecinii săi în conformitate cu aceste reguli, iar starea fiecărei celule la un moment dat este determinată în întregime de starea sa actuală și de starea vecinilor săi.
+Aceast proiect are ca scop prezentarea practicalitatilor automatelor celulare in:
+- [X] Vizualizari
+- [ ] Criptografie
+  - [ ] Imagini
+  - [ ] Text
+- [ ] Generare a numerelor aleatorii
+- [ ] Fractali
+- [ ] Simulari
+  - [ ] Nisip
+  - [ ] Apa
+- [ ] Efecte
+  - [ ] Blur
+- [ ] Animatii
+- etc
 ### Important!
 Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar în folder-ul `generated`.
 Codul generat pus "ca să fie"/pe care nu îl înțelegeți se punctează doar pentru puncte bonus, doar în contextul
@@ -14,26 +28,26 @@ O cerință nu se consideră îndeplinită dacă este realizată doar ca o serie
 
 ### Tema 0
 
-- [ ] Nume proiect (poate fi schimbat ulterior)
-- [ ] Scurtă descriere a temei alese, ce v-ați propus să implementați
+- [X] Nume proiect (poate fi schimbat ulterior)
+- [X] Scurtă descriere a temei alese, ce v-ați propus să implementați
 
 ## Tema 1
 
 #### Cerințe
-- [ ] definirea a minim **3-4 clase** folosind compunere cu clasele definite de voi
-- [ ] constructori de inițializare
-- [ ] pentru o aceeași (singură) clasă: constructor de copiere, `operator=` de copiere, destructor
+- [X] definirea a minim **3-4 clase** folosind compunere cu clasele definite de voi
+- [X] constructori de inițializare
+- [X] pentru o aceeași (singură) clasă: constructor de copiere, `operator=` de copiere, destructor
 <!-- - [ ] pentru o altă clasă: constructor de mutare, `operator=` de mutare, destructor -->
 <!-- - [ ] pentru o altă clasă: toate cele 5 funcții membru speciale -->
-- [ ] `operator<<` pentru toate clasele pentru afișare (std::ostream)
-- [ ] cât mai multe `const` (unde este cazul)
-- [ ] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese, dintre care cel puțin 1-2 funcții mai complexe
+- [X] `operator<<` pentru toate clasele pentru afișare (std::ostream)
+- [X] cât mai multe `const` (unde este cazul)
+- [X] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese, dintre care cel puțin 1-2 funcții mai complexe
   - nu doar citiri/afișări sau adăugat/șters elemente într-un/dintr-un vector
-- [ ] scenariu de utilizare a claselor definite:
+- [X] scenariu de utilizare a claselor definite:
   - crearea de obiecte și apelarea tuturor funcțiilor membru publice în main
   - vor fi adăugate în fișierul `tastatura.txt` DOAR exemple de date de intrare de la tastatură (dacă există); dacă aveți nevoie de date din fișiere, creați alte fișiere separat
-- [ ] tag de `git`: de exemplu `v0.1`
-- [ ] serviciu de integrare continuă (CI); exemplu: GitHub Actions
+- [X] tag de `git`: de exemplu `v0.1`
+- [X] serviciu de integrare continuă (CI); exemplu: GitHub Actions
 
 ## Tema 2
 
@@ -71,5 +85,4 @@ O cerință nu se consideră îndeplinită dacă este realizată doar ca o serie
 
 ## Resurse
 
-- [SFML](https://github.com/SFML/SFML/tree/2.6.1) (Zlib)
 - adăugați trimiteri către resursele externe care v-au ajutat sau pe care le-ați folosit

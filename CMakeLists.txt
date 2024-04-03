@@ -140,6 +140,20 @@ add_executable(${PROJECT_NAME}
         ConwaysGameOfLife.cpp
         Belousov.h
         Belousov.cpp
+        Visualization.h
+        Visualization.cpp
+        Cryptography.h
+        Cryptography.cpp
+        Fractals.h
+        Fractals.cpp
+        Main.h
+        Main.cpp
+        WolframVisualMenu.h
+        WolframVisualMenu.cpp
+        ConwaysVisualMenu.h
+        ConwaysVisualMenu.cpp
+        BelousovVisualMenu.h
+        BelousovVisualMenu.cpp
 )
 
 ###############################################################################

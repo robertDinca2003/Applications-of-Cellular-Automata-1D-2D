@@ -7,7 +7,7 @@
 
 #include <Helper.h>
 
-#include "ElementaryRule.h"
+//#include "ElementaryRule.h"
 
 
 //////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@
 /// if you have tested on all environments, and it works without it //
 //#include "env_fixes.h"                                              //
 //////////////////////////////////////////////////////////////////////
-#include "Menu.h"
+#include "Main.h"
 
 
 //////////////////////////////////////////////////////////////////////
@@ -55,32 +55,32 @@ int main() {
 
 
 
-    ElementaryRule rule30(30);
-    rule30.DisplayCurrentGeneration();
-    rule30.CreateNextGen();
-    rule30.DisplayCurrentGeneration();
-    rule30.CreateNextGen();
-    rule30.DisplayCurrentGeneration();
-    rule30.MultipleGeneration(15);
-    rule30.UpdateCurrGeneration(10);
-    rule30.DisplayCurrentGeneration();
-    rule30.DisplayUpToCurrentGeneration();
-    rule30.MultipleGeneration(25);
-    rule30.DisplayUpToCurrentGeneration();
-    rule30.DisplayAll();
-    cout << '\n' << rule30.getCurrGenNumber() << ' ' << rule30.getRuleNumber() << '\n';
-    for (int x: rule30.getCurrGeneration())
-        cout << x << ' ';
-    cout << '\n';
-    for (int x: rule30.getStartGen())
-        cout << x << ' ';
-    cout << '\n';
-    cout << rule30 << '\n';
-    rule30.setMaxDepth(50);
-    rule30.setMaxLength(100);
-    cout << rule30 << '\n';
-    ElementaryRule copyRule = rule30;
-    cout << copyRule << '\n';
+//    ElementaryRule rule30(30);
+//    rule30.DisplayCurrentGeneration();
+//    rule30.CreateNextGen();
+//    rule30.DisplayCurrentGeneration();
+//    rule30.CreateNextGen();
+//    rule30.DisplayCurrentGeneration();
+//    rule30.MultipleGeneration(15);
+//    rule30.UpdateCurrGeneration(10);
+//    rule30.DisplayCurrentGeneration();
+//    rule30.DisplayUpToCurrentGeneration();
+//    rule30.MultipleGeneration(25);
+//    rule30.DisplayUpToCurrentGeneration();
+//    rule30.DisplayAll();
+//    cout << '\n' << rule30.getCurrGenNumber() << ' ' << rule30.getRuleNumber() << '\n';
+//    for (int x: rule30.getCurrGeneration())
+//        cout << x << ' ';
+//    cout << '\n';
+//    for (int x: rule30.getStartGen())
+//        cout << x << ' ';
+//    cout << '\n';
+//    cout << rule30 << '\n';
+//    rule30.setMaxDepth(50);
+//    rule30.setMaxLength(100);
+//    cout << rule30 << '\n';
+//    ElementaryRule copyRule = rule30;
+//    cout << copyRule << '\n';
 
     sf::RenderWindow window(sf::VideoMode(1200, 600), "SFML Window");
     window.setFramerateLimit(60);

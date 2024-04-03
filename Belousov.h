@@ -4,6 +4,7 @@
 
 #ifndef OOP_BELOUSOV_H
 #define OOP_BELOUSOV_H
+
 #include <SFML/Graphics.hpp>
 #include <vector>
 
@@ -22,7 +23,7 @@ public:
 
     Belousov();
 
-    Belousov(int,int,int,int);
+    Belousov(int, int, int, int);
 
     ~Belousov();
 
@@ -36,9 +37,9 @@ public:
 
     void CreateNextGeneration();
 
-    void DisplayBelousov(sf::RenderWindow*);
+    void DisplayBelousov(sf::RenderWindow *);
 
-    void IncreaseInfection(float,float);
+    void IncreaseInfection(float, float);
 };
 
 
