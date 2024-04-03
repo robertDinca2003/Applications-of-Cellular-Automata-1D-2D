@@ -16,6 +16,7 @@
 /// if you have tested on all environments, and it works without it //
 //#include "env_fixes.h"                                              //
 //////////////////////////////////////////////////////////////////////
+#include "Menu.h"
 #include "Main.h"
 
 

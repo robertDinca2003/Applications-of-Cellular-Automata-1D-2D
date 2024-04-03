@@ -13,6 +13,9 @@
 /// @brief Main - represent the main menu of the application
 class Main : public Menu {
 public:
+
+    Main() = default;
+
     void DisplayContent() const override;
 
     void DisplayScreen(sf::RenderWindow *) override;
