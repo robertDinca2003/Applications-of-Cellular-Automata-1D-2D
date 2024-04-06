@@ -154,6 +154,10 @@ add_executable(${PROJECT_NAME}
         ConwaysVisualMenu.cpp
         BelousovVisualMenu.h
         BelousovVisualMenu.cpp
+        ConvolutionMatrix.h
+        ConvolutionMatrix.cpp
+        Custom2DMenu.h
+        Custom2DMenu.cpp
 )
 
 ###############################################################################

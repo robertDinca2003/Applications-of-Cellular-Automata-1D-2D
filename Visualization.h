@@ -10,6 +10,7 @@
 #include "WolframVisualMenu.h"
 #include "ConwaysVisualMenu.h"
 #include "BelousovVisualMenu.h"
+#include "Custom2DMenu.h"
 
 /// @brief Visualization - represent a submenu in which are presented different ways to visualize automata
 class Visualization : public Menu {

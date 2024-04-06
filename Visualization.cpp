@@ -70,7 +70,7 @@ Menu *Visualization::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     }
     if (input == "4") {
         //Custom
-        return new Visualization();
+        return new Custom2DMenu();
     }
     if (input == "5") {
         //Back
