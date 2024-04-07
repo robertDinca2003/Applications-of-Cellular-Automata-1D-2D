@@ -139,8 +139,9 @@ Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
         else
             return nullptr;
 //
-        delete this->game;
+
         if (!this->preset) {
+            delete this->game;
             return new ConwaysVisualMenu(this->state, this->preset,
                                          new ConwaysGameOfLife(newInitialCells, newHeight, newLength));
         }

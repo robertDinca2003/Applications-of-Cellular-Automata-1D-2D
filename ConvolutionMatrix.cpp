@@ -21,6 +21,9 @@ ConvolutionMatrix::ConvolutionMatrix(int kSize, int kernel[10][10]) {
     for(int i = 0; i<kSize; i++)
         for(int j = 0 ;j< kSize; j++)
             this->kernel[i][j] = kernel[i][j];
+    for(int i = 0 ;i < 500 ; i++)
+        for(int j = 0 ; j< 500; j++)
+            this->origin[i][j] = this->nextOrigin[i][j] = 0;
 }
 
 float ConvolutionMatrix::getKernelElem(int i, int j) const{
