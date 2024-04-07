@@ -1,7 +1,7 @@
 //
 // Created by robert on 05.04.2024.
 //
-#include <iostream>
+
 #include "ConvolutionMatrix.h"
 #include <cmath>
 #include <SFML/Graphics.hpp>
@@ -88,5 +88,5 @@ void ConvolutionMatrix::MouseIncrease(float x, float y, int value) {
     int xPos = static_cast<int>(x);
     int yPos = static_cast<int>(y);
     this->origin[xPos][yPos] = value;
-    std::cout << xPos << ' ' << yPos ;
+
 }

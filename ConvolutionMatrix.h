@@ -15,7 +15,7 @@ private:
     int origin[500][500];
     float nextOrigin[500][500];
 public:
-    ConvolutionMatrix(int);
+    explicit ConvolutionMatrix(int);
 
     ConvolutionMatrix(int,int[10][10]);
 
