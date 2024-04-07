@@ -38,7 +38,9 @@ void runGame(Menu *current, sf::RenderWindow *window, sf::Event *event) {
                 cout << *current;
                 current->DisplayScreen(window);
                 current->DisplayContent();
+                cout << "\n\nI want to take input !! \n\n";
                 Menu *next = current->TakeInput(window, event);
+                cout << "\n\n Input took \n\n";
                 delete current;
                 runGame(next, window, event);
             }

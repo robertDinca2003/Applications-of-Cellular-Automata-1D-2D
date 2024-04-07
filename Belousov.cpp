@@ -82,6 +82,7 @@ void Belousov::CreateNextGeneration() {
 }
 
 void Belousov::DisplayBelousov(sf::RenderWindow *window) {
+
     float pixelSize = 1.f;
     int len = 500;
 

@@ -18,7 +18,7 @@ private:
     ConwaysGameOfLife *game;
     bool preset;
 public:
-    explicit ConwaysVisualMenu();
+    ConwaysVisualMenu();
 
     explicit ConwaysVisualMenu(int, bool, ConwaysGameOfLife *);
 

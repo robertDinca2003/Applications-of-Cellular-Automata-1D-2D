@@ -19,9 +19,9 @@ public:
 
     ConvolutionMatrix(int,int[10][10]);
 
-    int getKernelSize() const;
+//    int getKernelSize() const;
 
-    int getKernelElem(int,int) const;
+    float getKernelElem(int,int) const;
 
     void setKernelElem(int,int,float);
 

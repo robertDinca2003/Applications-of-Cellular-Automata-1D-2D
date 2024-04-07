@@ -1,7 +1,7 @@
 //
 // Created by robert on 05.04.2024.
 //
-
+#include <iostream>
 #include "ConvolutionMatrix.h"
 #include <cmath>
 #include <SFML/Graphics.hpp>
@@ -10,7 +10,7 @@ ConvolutionMatrix::ConvolutionMatrix(int kSize) {
 
     for(int i = 0 ; i < kSize; i++)
         for(int j = 0; j< kSize; j++)
-            this->kernel[i][j] = 1/(float)(rand()%100);
+            this->kernel[i][j] = (rand()%100+1)/100.f;
     for(int i = 0 ;i < 500 ; i++)
         for(int j = 0 ; j< 500; j++)
             this->origin[i][j] = this->nextOrigin[i][j] = 0;
@@ -23,13 +23,13 @@ ConvolutionMatrix::ConvolutionMatrix(int kSize, int kernel[10][10]) {
             this->kernel[i][j] = kernel[i][j];
 }
 
-int ConvolutionMatrix::getKernelElem(int i, int j) const{
+float ConvolutionMatrix::getKernelElem(int i, int j) const{
         return this->kernel[i][j];
 }
 
-int ConvolutionMatrix::getKernelSize() const {
-    return this->kernelSize;
-}
+//int ConvolutionMatrix::getKernelSize() const {
+//    return this->kernelSize;
+//}
 
 void ConvolutionMatrix::setKernelElem(int x, int y, float val)
 {
@@ -71,7 +71,7 @@ void ConvolutionMatrix::DisplayConvolution(sf::RenderWindow *window) {
             pixel.setPosition(sf::Vector2(startX+j,startY+i));
             if(i == -1 || i == 500 || j == -1 || j == 500)
             {
-                pixel.setFillColor(sf::Color::Black);
+                pixel.setFillColor(sf::Color::Red);
             }
             else{
                 pixel.setFillColor(sf::Color(255*this->origin[i][j],255*this->origin[i][j],255*this->origin[i][j]));
@@ -85,4 +85,5 @@ void ConvolutionMatrix::MouseIncrease(float x, float y, int value) {
     int xPos = static_cast<int>(x);
     int yPos = static_cast<int>(y);
     this->origin[xPos][yPos] = value;
+    std::cout << xPos << ' ' << yPos ;
 }

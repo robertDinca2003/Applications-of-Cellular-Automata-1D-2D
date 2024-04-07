@@ -71,6 +71,7 @@ void BelousovVisualMenu::DisplayScreen(sf::RenderWindow *window) {
 
     window->clear(sf::Color::White);
     window->draw(text);
+    if(this->state == 0)
     window->display();
 }
 
@@ -156,7 +157,7 @@ Menu *BelousovVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) 
             }
             if (elapsedTime > keyPressDelay && !pause) {
                 this->game->CreateNextGeneration();
-                //this->DisplayScreen(window);
+                this->DisplayScreen(window);
                 this->game->DisplayBelousov(window);
                 lastKeyPressTime = now;
             }

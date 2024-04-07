@@ -4,6 +4,7 @@
 
 #include "Custom2DMenu.h"
 #include <cmath>
+#include <chrono>
 
 void Custom2DMenu::DisplayContent() const {
     if(this->state == 0)
@@ -55,7 +56,7 @@ void Custom2DMenu::DisplayScreen(sf::RenderWindow *window) {
             for(int i = 0; i<=4; i++)
                 display+=content[i];
         else if (this->state == 1)
-            for(int i = 5; i<= 6; i++)
+            for(int i = 5; i<= 7; i++)
                 display+=content[i];
 
         text.setString(display);
@@ -65,14 +66,14 @@ void Custom2DMenu::DisplayScreen(sf::RenderWindow *window) {
 
         square.setOutlineColor(sf::Color::Blue);
         square.setOutlineThickness(2.5f);
-
+        if(this->state == 0)
         for(int i = 0 ; i< 3; i++)
             for(int j = 0; j< 3; j++)
             {
                 square.setPosition(sf::Vector2(400.f+j*100.f , 200.f + i * 100.f));
                 window->draw(square);
             }
-
+    if(this->state == 0)
         window->display();
 }
 
@@ -124,8 +125,53 @@ Menu *Custom2DMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     }
     if(this->state == 1)
     {
+        int ok = 1;
+        bool pause = 0;
+        auto lastKeyPressTime = std::chrono::steady_clock::now();
+        const auto keyPressDelay = std::chrono::milliseconds(200);
 
+        while (window->isOpen() && ok) {
+            auto now = std::chrono::steady_clock::now();
+            auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastKeyPressTime);
+
+            while (window->pollEvent(*event)) {
+                if (event->type == sf::Event::Closed) {
+                    delete this->game;
+                    return nullptr;
+                }
+                if (event->type == sf::Event::KeyPressed && event->key.code == 27) {
+                    ok = 0;
+                    break;
+                }
+                if (event->type == sf::Event::KeyPressed && event->key.code == 28) {
+                    pause = !pause;
+                }
+                if (event->type == sf::Event::MouseMoved) {
+                    float xPos = event->mouseMove.x;
+                    float yPos = event->mouseMove.y;
+                    if (yPos >= 71.f && yPos <= 571.f && xPos >= 301.f && xPos <= 801.f)
+                        this->game->MouseIncrease(xPos - 301.f, yPos - 71.f,1);
+                    //cout << xPos << ' ' << yPos << '\n';
+
+
+                }
+                //cout << event->type <<'\n';
+            }
+            if (elapsedTime > keyPressDelay && !pause) {
+                this->game->CreateNextGeneration();
+                this->DisplayScreen(window);
+                this->game->DisplayConvolution(window);
+                lastKeyPressTime = now;
+            }
+
+
+            //cout << "itereation" << '\n';
+
+        }
+        return new Custom2DMenu(0,this->game,this->function);
     }
+
+    return this;
 }
 
 Custom2DMenu::Custom2DMenu() {

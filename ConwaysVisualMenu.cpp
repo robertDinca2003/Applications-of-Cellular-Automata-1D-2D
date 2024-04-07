@@ -18,6 +18,7 @@ ConwaysVisualMenu::ConwaysVisualMenu() {
     this->game = temp;
     this->input = "";
     this->preset = false;
+    cout << "Constructed menu Game of life\n";
 }
 
 
@@ -57,7 +58,7 @@ void ConwaysVisualMenu::DisplayScreen(sf::RenderWindow *window) {
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::Blue);
 
-    window->clear(sf::Color::White);
+
     string display = "";
     if (this->state == 0)
         for (int i = 0; i < 7; i++)
@@ -66,13 +67,6 @@ void ConwaysVisualMenu::DisplayScreen(sf::RenderWindow *window) {
         for (int i = 7; i < 10; i++)
             display += content[i];
     text.setString(display);
-    if (this->state == 0)
-        text.setPosition(150.f, 100.f);
-    else
-        text.setPosition(150.f, 10.f);
-    text.setLineSpacing(1.5f);
-    window->draw(text);
-    window->display();
 
     if (this->state == 0) {
         text.setCharacterSize(24);
@@ -88,15 +82,20 @@ void ConwaysVisualMenu::DisplayScreen(sf::RenderWindow *window) {
 
     window->clear(sf::Color::White);
     window->draw(text);
+    if(this->state == 0)
+        window->display();
+
 }
 
 
 Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     cout << "Current input: ";
-    if (this->state == 0)
-        ReadFromKeyBoard(&input, window, event, this, 10);
-
     string temp;
+//
+    if (this->state == 0)
+//        cin >> temp;
+        ReadFromKeyBoard(&input, window, event, this, 10);
+//
     int newInitialCells = this->game->getInitNrCells();
     int newHeight = this->game->getHeight();
     int newLength = this->game->getLength();
@@ -136,17 +135,25 @@ Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
             }
 
 
-        } else
+        }
+        else
             return nullptr;
-
+//
         delete this->game;
         if (!this->preset) {
             return new ConwaysVisualMenu(this->state, this->preset,
                                          new ConwaysGameOfLife(newInitialCells, newHeight, newLength));
-        } else {
-            int mat[502][1102];
-            return new ConwaysVisualMenu(this->state, this->preset, new ConwaysGameOfLife(mat));
         }
+//        int mat[502][1102];
+//        ConwaysGameOfLife temp(mat);
+//        return new ConwaysVisualMenu(this->state, this->preset, new ConwaysGameOfLife(mat));
+//        if(this->preset) {
+//            int mat[502][1102];
+//            for(int i = 0; i<502; i++)
+//                for(int j = 0 ; j< 1102; j++)
+//                    mat[i][j] = 0;
+//            return new ConwaysVisualMenu(this->state, this->preset, new ConwaysGameOfLife(mat));
+//        }
     } else if (this->state == 1) {
         auto lastKeyPressTime = std::chrono::steady_clock::now();
         const auto keyPressDelay = std::chrono::milliseconds(200);
@@ -158,7 +165,9 @@ Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
             if (event->type != sf::Event::Closed && elapsedTime > keyPressDelay) {
                 //cout << "I am here conway\n";
 
+                this->DisplayScreen(window);
                 game->DisplayGameOfLife(window);
+
                 game->CreateNextGeneration();
                 lastKeyPressTime = now;
 
