@@ -33,8 +33,6 @@ void runGame(Menu *current, sf::RenderWindow *window, sf::Event *event) {
                 window->close();
                 return;
             } else {
-
-
                 cout << *current;
                 current->DisplayScreen(window);
                 current->DisplayContent();

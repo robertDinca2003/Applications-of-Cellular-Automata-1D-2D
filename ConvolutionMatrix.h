@@ -12,7 +12,8 @@ class ConvolutionMatrix {
 private:
     float kernel[10][10];
     float kernelSize;
-    int origin[500][500];
+    int actFunc;
+    float origin[500][500];
     float nextOrigin[500][500];
 public:
     explicit ConvolutionMatrix(int);
@@ -23,7 +24,11 @@ public:
 
     float getKernelElem(int,int) const;
 
+    void setActFunc(int);
+
     void setKernelElem(int,int,float);
+
+    float activationFunction(int func, float val);
 
     void CreateNextGeneration();
 

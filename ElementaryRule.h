@@ -7,7 +7,8 @@
 
 #include <vector>
 #include <iostream>
-
+#include <string>
+#include "CryptMethods.h"
 using namespace std;
 
 
@@ -21,7 +22,7 @@ using namespace std;
 /// @param startGen The initial generation
 /// @param currGen The current generation
 /// @param allGenerations All generation which can be accessed by index of every generation
-class ElementaryRule {
+class ElementaryRule: public CryptMethods {
 private:
     int ruleNumber;
     int maxLength;
@@ -73,6 +74,8 @@ public:
 
     void setMaxLength(int);
 
+    void setRuleNumber(int);
+
     // Main Functionality
     /// @brief CreateNextGen() - Used for creating the next generation based on the current one
     void CreateNextGen();
@@ -93,6 +96,8 @@ public:
     void GenerateToMaxDepth();
 
     void DisplayAll();
+
+    string CreateCryptMask();
 };
 
 

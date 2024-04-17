@@ -87,10 +87,19 @@ Menu *BelousovVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) 
         ReadFromKeyBoard(&input, window, event, this, 100);
         if (input == "1") {
             cout << "Insert new Q: \n";
-            ReadFromKeyBoard(&temp, window, event, this, 255);
-            if (temp == "exit")return nullptr;
-            newQ = stoi(temp);
-            if (newQ == 0) newQ++;
+            try{
+                ReadFromKeyBoard(&temp, window, event, this, 255);
+                if (temp == "exit")return nullptr;
+                if(stoi(temp) <= newG)
+                    throw runtime_error("Q can not be lower than G!\n");
+                newQ = stoi(temp);
+                if (newQ == 0) newQ++;
+
+            }
+            catch(const exception& e){
+                cout << "Exception " << e.what() << endl;
+            }
+
         }
         if (input == "2") {
             cout << "Insert new K1:\n";
@@ -108,10 +117,19 @@ Menu *BelousovVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) 
         }
         if (input == "4") {
             cout << "Insert new G: \n";
-            ReadFromKeyBoard(&temp, window, event, this, 100);
-            if (temp == "exit")return nullptr;
-            newG = stoi(temp);
-            if (newG == 0)newG++;
+            try{
+                ReadFromKeyBoard(&temp, window, event, this, 100);
+                if (temp == "exit")return nullptr;
+                if(stoi(temp) >= newQ){
+                    throw runtime_error("G can not be larger than Q\n");
+                }
+                newG = stoi(temp);
+                if (newG == 0)newG++;
+
+            }catch (const exception &e){
+                cout << "Exception " << e.what() << endl;
+            }
+
         }
         if (input == "5") {
             this->state = 1;

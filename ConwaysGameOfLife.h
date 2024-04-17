@@ -6,8 +6,10 @@
 #define OOP_CONWAYSGAMEOFLIFE_H
 
 #include<SFML/Graphics.hpp>
+#include "CryptMethods.h"
+#include <string>
 
-class ConwaysGameOfLife {
+class ConwaysGameOfLife: public CryptMethods {
 private:
     int matrix[502][1102];
     int copyMat[502][1102];
@@ -36,11 +38,17 @@ public:
 
     int getLength() const;
 
+    void setWidth(int);
+
+    void setHeight(int);
+
     void setInitNrCells(int);
 
     void CreateNextGeneration();
 
     void DisplayGameOfLife(sf::RenderWindow *);
+
+    std::string CreateCryptMask();
 };
 
 

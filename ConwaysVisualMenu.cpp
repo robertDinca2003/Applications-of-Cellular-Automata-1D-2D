@@ -4,6 +4,7 @@
 
 #include "ConwaysVisualMenu.h"
 #include "chrono"
+#include <exception>
 
 ConwaysVisualMenu::ConwaysVisualMenu(int state, bool preset, ConwaysGameOfLife *game) {
     this->state = state;

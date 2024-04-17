@@ -158,6 +158,10 @@ add_executable(${PROJECT_NAME}
         ConvolutionMatrix.cpp
         Custom2DMenu.h
         Custom2DMenu.cpp
+        TextEncryption.h
+        TextEncryption.cpp
+        CryptMethods.h
+        CryptMethods.cpp
 )
 
 ###############################################################################

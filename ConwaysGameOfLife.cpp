@@ -135,3 +135,15 @@ void ConwaysGameOfLife::DisplayGameOfLife(sf::RenderWindow *window) {
         }
     window->display();
 }
+
+void ConwaysGameOfLife::setWidth(int width) {
+    this->length = width;
+}
+
+void ConwaysGameOfLife::setHeight(int h) {
+    this->height = h;
+}
+
+std::string ConwaysGameOfLife::CreateCryptMask() {
+    return "";
+}

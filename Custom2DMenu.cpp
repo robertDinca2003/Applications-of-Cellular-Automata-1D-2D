@@ -6,11 +6,15 @@
 #include <cmath>
 #include <chrono>
 
+
+
+
+
 void Custom2DMenu::DisplayContent() const {
     if(this->state == 0)
     {
         cout << "Custom 2D Automaton Visualization\n";
-        cout << "1. Change Convolution Matrix\n";
+        cout << "1. New Random Convolution Matrix\n";
         cout << "2. Change function\n";
         cout << "3. Generate\n";
         cout << "4. Back\n";
@@ -34,13 +38,18 @@ void Custom2DMenu::DisplayScreen(sf::RenderWindow *window) {
         window->clear(sf::Color::White);
         vector<string> content(8);
         content[0] = "Custom 2D Automaton Visualization\n";
-        content[1] = "1. Change Convolution Matrix\n";
-        content[2] = "2. Change Function" + to_string(this->function) +"\n";
+        content[1] = "1. New Random Convolution Matrix\n";
+        content[2] = "2. Change Function " + to_string(this->function) ;
         content[3] = "3. Generate\n";
         content[4] = "4. Back\n";
         content[5] = "Custom 2D Automaton Visualization\n";
         content[6] = "1. Back\n";
         content[7] = "2. Pause\n";
+
+        if(this->function == 1) content[2] += ":  f(x) = x\n";
+        else if(this->function == 2) content[2] += ":  f(x) = abs(x)\n";
+        else if(this->function == 3) content[2] += ":  f(x) = sin(x)\n";
+        else if(this->function == 4) content[2] += ":  f(x) = x^2\n";
 
         sf::Text text;
         sf::Font font;
@@ -72,6 +81,9 @@ void Custom2DMenu::DisplayScreen(sf::RenderWindow *window) {
             {
                 square.setPosition(sf::Vector2(400.f+j*100.f , 200.f + i * 100.f));
                 window->draw(square);
+                text.setString(to_string(static_cast<int>(this->game->getKernelElem(i,j)*100)/100.f));
+                text.setPosition(sf::Vector2(405.f+j*100.f, 240.f + i * 100.f));
+                window->draw(text);
             }
     if(this->state == 0)
         window->display();
@@ -86,25 +98,19 @@ Menu *Custom2DMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
             for(int i = 0 ; i < 3 ; i++)
                 for(int j = 0; j<3; j++)
                 {
-                    ReadFromKeyBoard(&input, window, event, this, 10);
-                    if(input == "exit")
-                    {
-                        delete this->game;
-                        return nullptr;
-                    }
-
-                    this->game->setKernelElem(i,j,fmax(stoi(input)/100.f,0.01));
+                    this->game->setKernelElem(i,j,(rand()%1000)/100.f-5.f);
                 }
         }
         else if(input == "2")
         {
-            ReadFromKeyBoard(&input, window, event, this, 10);
+            ReadFromKeyBoard(&input, window, event, this, 4);
             if(input == "exit")
             {
                 delete this->game;
                 return nullptr;
             }
             this->function = stoi(input);
+            this->game->setActFunc(this->function);
         }
         else if(input == "3")
         {
@@ -150,7 +156,7 @@ Menu *Custom2DMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
                     float xPos = event->mouseMove.x;
                     float yPos = event->mouseMove.y;
                     if (yPos >= 71.f && yPos <= 571.f && xPos >= 301.f && xPos <= 801.f)
-                        this->game->MouseIncrease(xPos - 301.f, yPos - 71.f,1);
+                        this->game->MouseIncrease(yPos - 71.f, xPos - 301.f, 1);
                     //cout << xPos << ' ' << yPos << '\n';
 
 
@@ -168,7 +174,7 @@ Menu *Custom2DMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
             //cout << "itereation" << '\n';
 
         }
-        return new Custom2DMenu(0,this->game,this->function);
+        return new Custom2DMenu(0,new ConvolutionMatrix(3),this->function);
     }
 
     return this;
@@ -179,13 +185,15 @@ Custom2DMenu::Custom2DMenu() {
     this->game  = temp;
     this->state = 0 ;
     this->input = "";
-    this->function = 0;
+    this->function = 1;
 }
 
 Custom2DMenu::Custom2DMenu(int state,ConvolutionMatrix* game, int function) {
     this->game = game;
+    this->game->setActFunc(function);
     this->function = function;
     this->state = state;
     this->input = "";
 
 }
+

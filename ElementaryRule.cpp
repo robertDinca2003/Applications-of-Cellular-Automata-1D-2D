@@ -236,3 +236,14 @@ void ElementaryRule::DisplayAll() {
     DisplayUpToCurrentGeneration();
 
 }
+
+void ElementaryRule::setRuleNumber(int ruleNum) {
+    this->ruleNumber = ruleNum;
+    for(int i = 0 ; i < 8 ; i++)
+        this->ruleCod[i] = ruleNum & 1 , ruleNum = ruleNum >> 1;
+
+}
+
+std::string ElementaryRule::CreateCryptMask() {
+    return "";
+}

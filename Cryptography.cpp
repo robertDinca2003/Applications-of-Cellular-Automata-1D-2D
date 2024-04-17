@@ -4,6 +4,7 @@
 
 #include "Cryptography.h"
 #include "NewMain.h"
+#include "TextEncryption.h"
 
 
 void Cryptography::DisplayContent() const {
@@ -60,7 +61,7 @@ Menu *Cryptography::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     }
     if (input == "2") {
         //Text
-        return new Cryptography();
+        return new TextEncryption();
     }
     if (input == "3") {
         //Back

@@ -23,6 +23,8 @@ public:
 
     Custom2DMenu(int,ConvolutionMatrix*,int);
 
+    float activationFunction(int func, float val);
+
     void DisplayContent() const override;
 
     void DisplayScreen(sf::RenderWindow *) override;
