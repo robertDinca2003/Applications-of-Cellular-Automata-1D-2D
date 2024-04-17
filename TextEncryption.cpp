@@ -25,11 +25,12 @@ TextEncryption::TextEncryption() {
     this->game = new ConwaysGameOfLife(100,100,200);
     this->processes.push_back(this->rule);
     this->processes.push_back(this->game);
+    std::cout<<this->rule->CreateCryptMask()<< ' ' << this->game->CreateCryptMask() << '\n';
 }
 
 
 
-TextEncryption::TextEncryption(ElementaryRule *rule, ConwaysGameOfLife *game, std::vector<CryptMethods*>processes, std::string message) {
+TextEncryption::TextEncryption(ElementaryRule *rule, ConwaysGameOfLife *game, std::vector<CryptMethods*>processes, const std::string message) {
     this->rule = rule;
     this->game = game;
     for(auto proc : processes)
