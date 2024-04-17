@@ -21,8 +21,10 @@ TextEncryption::TextEncryption() {
     this->message = "Message";
     this->input = "";
     this->encryptedMessage = this->message;
-    this->rule = new ElementaryRule(30);
-    this->game = new ConwaysGameOfLife(100,100,200);
+    ElementaryRule temp =  ElementaryRule(30) ;
+    this->rule = &temp;
+    ConwaysGameOfLife temp2 = ConwaysGameOfLife(200,100,100) ;
+    this->game = &temp2;
     this->processes.push_back(this->rule);
     this->processes.push_back(this->game);
     std::cout<<this->rule->CreateCryptMask()<< ' ' << this->game->CreateCryptMask() << '\n';
