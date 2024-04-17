@@ -48,7 +48,7 @@ public:
 
     void DisplayGameOfLife(sf::RenderWindow *);
 
-    std::string CreateCryptMask();
+    std::string CreateCryptMask() override;
 };
 
 

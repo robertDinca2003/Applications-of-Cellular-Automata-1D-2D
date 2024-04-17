@@ -96,7 +96,7 @@ public:
 
     void DisplayAll();
 
-    std::string CreateCryptMask();
+    std::string CreateCryptMask() override;
 };
 
 
