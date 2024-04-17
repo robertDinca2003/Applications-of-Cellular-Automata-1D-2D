@@ -14,7 +14,7 @@ class Custom2DMenu: public Menu {
 private:
     int state;
     int function;
-    string input;
+    std::string input;
     ConvolutionMatrix* game;
 
 public:

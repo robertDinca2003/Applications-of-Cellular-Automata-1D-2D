@@ -33,12 +33,12 @@ void runGame(Menu *current, sf::RenderWindow *window, sf::Event *event) {
                 window->close();
                 return;
             } else {
-                cout << *current;
+                std::cout << *current;
                 current->DisplayScreen(window);
                 current->DisplayContent();
-                cout << "\n\nI want to take input !! \n\n";
+                std::cout << "\n\nI want to take input !! \n\n";
                 Menu *next = current->TakeInput(window, event);
-                cout << "\n\n Input took \n\n";
+                std::cout << "\n\n Input took \n\n";
                 delete current;
                 runGame(next, window, event);
             }
@@ -69,19 +69,19 @@ int main() {
     rule30.MultipleGeneration(25);
     rule30.DisplayUpToCurrentGeneration();
     rule30.DisplayAll();
-    cout << '\n' << rule30.getCurrGenNumber() << ' ' << rule30.getRuleNumber() << '\n';
+    std::cout << '\n' << rule30.getCurrGenNumber() << ' ' << rule30.getRuleNumber() << '\n';
     for (int x: rule30.getCurrGeneration())
-        cout << x << ' ';
-    cout << '\n';
+        std::cout << x << ' ';
+    std::cout << '\n';
     for (int x: rule30.getStartGen())
-        cout << x << ' ';
-    cout << '\n';
-    cout << rule30 << '\n';
+        std::cout << x << ' ';
+    std::cout << '\n';
+    std::cout << rule30 << '\n';
     rule30.setMaxDepth(50);
     rule30.setMaxLength(100);
-    cout << rule30 << '\n';
+    std::cout << rule30 << '\n';
     ElementaryRule copyRule = rule30;
-    cout << copyRule << '\n';
+    std::cout << copyRule << '\n';
 
     sf::RenderWindow window(sf::VideoMode(1200, 600), "SFML Window");
     window.setFramerateLimit(60);

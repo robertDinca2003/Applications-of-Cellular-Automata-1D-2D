@@ -4,17 +4,17 @@
 #include "Visualization.h"
 
 void Visualization::DisplayContent() const {
-    cout << "<--- Visualizations --->\n";
-    cout << "1. Wolfram's Elementary rules\n";
-    cout << "2. Conway's Game of Life\n";
-    cout << "3. Belousov-Zhabotinsky\n";
-    cout << "4. Custom 2D Cellular Automaton\n";
-    cout << "5. Back\n";
+   std::cout << "<--- Visualizations --->\n";
+   std::cout << "1. Wolfram's Elementary rules\n";
+   std::cout << "2. Conway's Game of Life\n";
+   std::cout << "3. Belousov-Zhabotinsky\n";
+   std::cout << "4. Custom 2D Cellular Automaton\n";
+   std::cout << "5. Back\n";
 }
 
 
 void Visualization::DisplayScreen(sf::RenderWindow *window) {
-    vector<string> content(6);
+    std::vector<std::string> content(6);
 
     content[0] = "<--- Visualization --->\n\n";
     content[1] = "1. Wolfram's Elementary Rules\n";
@@ -22,7 +22,7 @@ void Visualization::DisplayScreen(sf::RenderWindow *window) {
     content[3] = "3. Belousov-Zhabotinsky\n";
     content[4] = "4. Custom 2D automaton\n";
     content[5] = "5. Back";
-    string display;
+    std::string display;
 
 
     for (int i = 0; i < 6; i++)
@@ -45,19 +45,19 @@ void Visualization::DisplayScreen(sf::RenderWindow *window) {
 
 
 Menu *Visualization::TakeInput(sf::RenderWindow *window, sf::Event *event) {
-    string input;
+    std::string input;
     ReadFromKeyBoard(&input, window, event, this, 100);
-    cout << "I am here\n";
+   std::cout << "I am here\n";
     //while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-    cout << "I got out\n";
+   std::cout << "I got out\n";
     //if(event->type == sf::Event::Closed)return nullptr;
     //if(event->type == sf::Event::KeyPressed)
     // {input = to_string(char(event->key.code-26));
-    //     cout << event->key.code <<'\n';}
-    cout << input << " entered\n";
+    //    std::cout << event->key.code <<'\n';}
+   std::cout << input << " entered\n";
     if (input == "1") {
         //Wolfram
-        cout << "I AM HERE NIGGA\n";
+       std::cout << "I AM HERE NIGGA\n";
         return new WolframVisualMenu();
     }
     if (input == "2") {

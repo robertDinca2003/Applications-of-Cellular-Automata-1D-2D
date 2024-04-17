@@ -6,16 +6,16 @@
 
 
 void Main::DisplayContent() const {
-    cout << "<--- Applications of Cellular Automata --->\n\n";
-    cout << "1. Visualizations\n";
-    cout << "2. Cryptography\n";
-    cout << "3. Fractals\n";
-    cout << "4. Exit\n";
+   std::cout << "<--- Applications of Cellular Automata --->\n\n";
+   std::cout << "1. Visualizations\n";
+   std::cout << "2. Cryptography\n";
+   std::cout << "3. Fractals\n";
+   std::cout << "4. Exit\n";
 }
 
 
 void Main::DisplayScreen(sf::RenderWindow *window) {
-    vector<string> content(5);
+    std::vector<std::string> content(5);
 
     content[0] = "<--- Applications of Cellular Automata --->\n\n";
     content[1] = "1. Visualization\n";
@@ -23,7 +23,7 @@ void Main::DisplayScreen(sf::RenderWindow *window) {
     content[3] = "3. Fractals\n";
     content[4] = "4. Exit";
 
-    string display;
+    std::string display;
     for (int i = 0; i < 5; i++)
         display += content[i];
 
@@ -44,15 +44,15 @@ void Main::DisplayScreen(sf::RenderWindow *window) {
 
 
 Menu *Main::TakeInput(sf::RenderWindow *window, sf::Event *event) {
-    string input;
+    std::string input;
     ReadFromKeyBoard(&input, window, event, this, 100);
-    cout << "I am here\n";
+   std::cout << "I am here\n";
 //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-    cout << "I got out\n";
+   std::cout << "I got out\n";
 //    if(event->type == sf::Event::Closed)return nullptr;
 //    if(event->type == sf::Event::KeyPressed)
 //    {input = to_string(char(event->key.code-26));
-//        cout << event->key.code <<'\n';}
+//       std::cout << event->key.code <<'\n';}
 //    else input = "-1";
     if (input == "1") {
         return new Visualization();

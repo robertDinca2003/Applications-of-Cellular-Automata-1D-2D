@@ -6,21 +6,21 @@
 
 
 void Fractal::DisplayContent() const {
-    cout << "<--- Fractals --->\n";
-    cout << "1. Wolfram's Elementary Rules\n";
-    cout << "2. More Fractals\n";
-    cout << "3. Back\n";
+    std::cout << "<--- Fractals --->\n";
+    std::cout << "1. Wolfram's Elementary Rules\n";
+    std::cout << "2. More Fractals\n";
+    std::cout << "3. Back\n";
 }
 
 
 void Fractal::DisplayScreen(sf::RenderWindow *window) {
-    vector<string> content(4);
+    std::vector<std::string> content(4);
     content[0] = "<--- Fractals --->\n";
     content[1] = "1. Wolfram's Elementary Rules\n";
     content[2] = "2. More Fractals\n";
     content[3] = "3. Back\n";
 
-    string display;
+    std::string display;
     for (int i = 0; i < 4; i++)
         display += content[i];
 
@@ -43,15 +43,15 @@ void Fractal::DisplayScreen(sf::RenderWindow *window) {
 
 
 Menu *Fractal::TakeInput(sf::RenderWindow *window, sf::Event *event) {
-    string input;
-    cout << "I am here\n";
+    std::string input;
+    std::cout << "I am here\n";
     ReadFromKeyBoard(&input, window, event, this, 100);
 //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-//    cout << "I got out\n";
+//   std::cout << "I got out\n";
 //    if(event->type == sf::Event::Closed)return nullptr;
 //    if(event->type == sf::Event::KeyPressed)
 //    {input = to_string(char(event->key.code-26));
-//        cout << event->key.code <<'\n';}
+//       std::cout << event->key.code <<'\n';}
     if (input == "1") {
         //Wolfram
         return new Fractal();

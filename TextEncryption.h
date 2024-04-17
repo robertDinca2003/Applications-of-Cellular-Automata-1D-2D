@@ -15,17 +15,17 @@ class TextEncryption : public Menu {
 
 private:
     static int option;
-    string input;
-    string message;
-    string encryptedMessage;
+    std::string input;
+    std::string message;
+    std::string encryptedMessage;
     ElementaryRule *rule;
     ConwaysGameOfLife *game;
-    vector<CryptMethods *> processes;
+    std::vector<CryptMethods *> processes;
 public:
 
     TextEncryption();
 
-    TextEncryption(ElementaryRule *, ConwaysGameOfLife *, vector<CryptMethods *>, string);
+    TextEncryption(ElementaryRule *, ConwaysGameOfLife *, std::vector<CryptMethods *>, std::string);
 
     ~TextEncryption();
 

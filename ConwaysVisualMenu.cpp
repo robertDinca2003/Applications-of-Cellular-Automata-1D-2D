@@ -19,31 +19,31 @@ ConwaysVisualMenu::ConwaysVisualMenu() {
     this->game = temp;
     this->input = "";
     this->preset = false;
-    cout << "Constructed menu Game of life\n";
+   std::cout << "Constructed menu Game of life\n";
 }
 
 
 void ConwaysVisualMenu::DisplayContent() const {
     if (this->state == 0) {
-        cout << "<--- Game of Life Visualization --->\n";
-        cout << "1. Number of initial cells: " << this->game->getInitNrCells() << "\n";
-        cout << "2. Use Preset\n";
-        cout << "3. Generate\n";
-        cout << "4. Back\n";
+       std::cout << "<--- Game of Life Visualization --->\n";
+       std::cout << "1. Number of initial cells: " << this->game->getInitNrCells() << "\n";
+       std::cout << "2. Use Preset\n";
+       std::cout << "3. Generate\n";
+       std::cout << "4. Back\n";
     }
     if (this->state == 1) {
-        cout << "<--- Game of Life Visualization --->\n";
-        cout << "1. Stop\n 2. Back\n";
+       std::cout << "<--- Game of Life Visualization --->\n";
+       std::cout << "1. Stop\n 2. Back\n";
     }
 }
 
 
 void ConwaysVisualMenu::DisplayScreen(sf::RenderWindow *window) {
-    vector<string> content(10);
+    std::vector<std::string> content(10);
     content[0] = "<--- Game of Life Visualization --->\n";
-    content[1] = "1. Number of initial cells: " + to_string(this->game->getInitNrCells());
-    content[2] = "\n2. Height: " + to_string(this->game->getHeight());
-    content[3] = "\n3. Width: " + to_string(this->game->getLength());
+    content[1] = "1. Number of initial cells: " + std::to_string(this->game->getInitNrCells());
+    content[2] = "\n2. Height: " + std::to_string(this->game->getHeight());
+    content[3] = "\n3. Width: " + std::to_string(this->game->getLength());
     content[4] = "\n4. Use Preset\n";
     content[5] = "5. Generate\n";
     content[6] = "6. Back\n";
@@ -60,7 +60,7 @@ void ConwaysVisualMenu::DisplayScreen(sf::RenderWindow *window) {
     text.setFillColor(sf::Color::Blue);
 
 
-    string display = "";
+    std::string display = "";
     if (this->state == 0)
         for (int i = 0; i < 7; i++)
             display += content[i];
@@ -90,8 +90,8 @@ void ConwaysVisualMenu::DisplayScreen(sf::RenderWindow *window) {
 
 
 Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
-    cout << "Current input: ";
-    string temp;
+   std::cout << "Current input: ";
+    std::string temp;
 //
     if (this->state == 0)
 //        cin >> temp;
@@ -105,7 +105,7 @@ Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     if (this->state == 0) {
         if (input != "exit") {
             if (input == "1") {
-                cout << "Insert new initial cells number\n";
+               std::cout << "Insert new initial cells number\n";
                 ReadFromKeyBoard(&temp, window, event, this, this->game->getHeight() * this->game->getLength() - 1);
                 if (temp == "exit")return nullptr;
                 newInitialCells = stoi(temp);
@@ -113,14 +113,14 @@ Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
                     newInitialCells = newLength * newHeight - 1;
                 this->game->setInitNrCells(newInitialCells);
             } else if (input == "2") {
-                cout << "Insert new height\n";
+               std::cout << "Insert new height\n";
                 ReadFromKeyBoard(&temp, window, event, this, 500);
                 if (temp == "exit")return nullptr;
                 newHeight = stoi(temp);
                 if (newInitialCells > newLength * newHeight)
                     newInitialCells = newLength * newHeight - 1, this->game->setInitNrCells(newInitialCells);
             } else if (input == "3") {
-                cout << "Insert new width\n";
+               std::cout << "Insert new width\n";
                 ReadFromKeyBoard(&temp, window, event, this, 1100);
                 if (temp == "exit")return nullptr;
                 newLength = stoi(temp);
@@ -175,7 +175,7 @@ Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
 
 
             }
-            // cout << event->type <<' ' << sf::Event::Closed << ' ' << sf::Event::Resized<<'\n';
+            //std::cout << event->type <<' ' << sf::Event::Closed << ' ' << sf::Event::Resized<<'\n';
             while (window->pollEvent(*event))
                 if (event->type == sf::Event::Closed) {
                     delete this->game;
@@ -200,7 +200,7 @@ Menu *ConwaysVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
                 }
 
         }
-        cout << "i am out\n";
+       std::cout << "i am out\n";
         if (event->type == sf::Event::Closed) {
             delete this->game;
             return nullptr;

@@ -6,10 +6,10 @@
 #include "Menu.h"
 
 
-void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event, Menu *men, int maxim) {
+void ReadFromKeyBoard(std::string *input, sf::RenderWindow *window, sf::Event *event, Menu *men, int maxim) {
     int temp = 0;
     bool ok = false;
-    string inputMes;
+    std::string inputMes;
 
     sf::Text text;
     sf::Font font;
@@ -35,8 +35,8 @@ void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event,
             if (int(event->text.unicode) >= 48 && int(event->text.unicode) < 58) {
                 temp = temp * 10 + static_cast<int>(event->text.unicode) - 48;
                 if (temp > maxim) temp = maxim;
-                cout << temp << '\n';
-                inputMes = "Insert: " + to_string(temp);
+                std::cout << temp << '\n';
+                inputMes = "Insert: " + std::to_string(temp);
                 text.setString(inputMes);
 
                 sf::RectangleShape clearRect(sf::Vector2f(250.f, 45.f));
@@ -51,8 +51,8 @@ void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event,
 
                 temp = temp / 10;
 
-                cout << temp << '\n';
-                inputMes = "Insert: " + to_string(temp);
+                std::cout << temp << '\n';
+                inputMes = "Insert: " + std::to_string(temp);
                 text.setString(inputMes);
                 sf::RectangleShape clearRect(sf::Vector2f(250.f, 45.f));
                 clearRect.setPosition(20.f, 540.f);
@@ -74,8 +74,8 @@ void ReadFromKeyBoard(string *input, sf::RenderWindow *window, sf::Event *event,
     if (event->type == sf::Event::Closed)
         *input = "exit";
     else {
-        cout << "Inputed Value is " << temp << '\n';
-        *input = to_string(temp);
+        std::cout << "Inputed Value is " << temp << '\n';
+        *input = std::to_string(temp);
     }
 }
 

@@ -4,10 +4,9 @@
 #include "ConwaysGameOfLife.h"
 #include <iostream>
 
-using namespace std;
 
 ConwaysGameOfLife::ConwaysGameOfLife() {
-    cout << "Constructed Game of Life\n";
+   std::cout << "Constructed Game of Life\n";
     this->height = 500;
     this->length = 1100;
     for (int i = 0; i < 502; i++)
@@ -21,7 +20,7 @@ ConwaysGameOfLife::ConwaysGameOfLife() {
 }
 
 ConwaysGameOfLife::ConwaysGameOfLife(int initialNumberCells, int height, int length) {
-    cout << "Constructed Game of Life\n";
+   std::cout << "Constructed Game of Life\n";
     this->height = height;
     this->length = length;
     this->initialNumberCells = initialNumberCells;
@@ -36,7 +35,7 @@ ConwaysGameOfLife::ConwaysGameOfLife(int initialNumberCells, int height, int len
 
 ConwaysGameOfLife::ConwaysGameOfLife(int mat[502][1102]) {
     int initCellNumber = 0;
-    cout << "Constructed Game of Life\n";
+   std::cout << "Constructed Game of Life\n";
     for (int i = 0; i < 502; i++)
         for (int j = 0; j < 1102; j++) {
             this->matrix[i][j] = mat[i][j];
@@ -73,7 +72,7 @@ ConwaysGameOfLife &ConwaysGameOfLife::operator=(const ConwaysGameOfLife &other) 
 }
 
 ConwaysGameOfLife::~ConwaysGameOfLife() {
-    cout << "Deconstructed Game of Life\n";
+   std::cout << "Deconstructed Game of Life\n";
 }
 
 int ConwaysGameOfLife::getInitNrCells() const {
@@ -93,7 +92,7 @@ void ConwaysGameOfLife::setInitNrCells(int nr) {
 }
 
 void ConwaysGameOfLife::CreateNextGeneration() {
-    cout << "Generation " << currentGen << " created\n";
+   std::cout << "Generation " << currentGen << " created\n";
     for (int i = 1; i <= this->height; i++)
         for (int j = 1; j <= this->length; j++) {
             this->copyMat[i][j] = this->matrix[i + 1][j + 1] + this->matrix[i + 1][j] + this->matrix[i + 1][j - 1] +
@@ -113,7 +112,7 @@ void ConwaysGameOfLife::CreateNextGeneration() {
 
 void ConwaysGameOfLife::DisplayGameOfLife(sf::RenderWindow *window) {
 
-    float pixelSize = min(1102 / (this->length + 2), 502 / (this->height + 2));
+    float pixelSize = std::min(1102 / (this->length + 2), 502 / (this->height + 2));
 
     float startX = (1200.f - pixelSize * this->length) / 2.f;
     float startY = 85.f;

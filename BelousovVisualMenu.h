@@ -12,7 +12,7 @@
 class BelousovVisualMenu : public Menu {
 private:
     int state;
-    string input;
+    std::string input;
     Belousov *game;
 public:
 

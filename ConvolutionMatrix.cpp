@@ -5,14 +5,16 @@
 #include "ConvolutionMatrix.h"
 #include <cmath>
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 float ConvolutionMatrix::activationFunction(int func, float val) {
 
     if(func == 1)
         return val;
     if(func == 2)
-        return abs(val);
+    {
+        if(val < 0) return -val;
+        else return val;
+    }
     if(func == 3)
         return sin(val);
     if(func == 4)

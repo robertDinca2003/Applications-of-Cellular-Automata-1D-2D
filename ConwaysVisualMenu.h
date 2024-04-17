@@ -14,7 +14,7 @@
 class ConwaysVisualMenu : public Menu {
 private:
     int state;
-    string input;
+    std::string input;
     ConwaysGameOfLife *game;
     bool preset;
 public:

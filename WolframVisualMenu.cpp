@@ -10,7 +10,7 @@ void DisplayBufferContent(ElementaryRule *ruleSet, sf::RenderWindow *window) {
     int height = ruleSet->getMaxDepth();
     int length = ruleSet->getMaxLength();
     int currHeight = ruleSet->getCurrGenNumber();
-    float pixelSize = min(1100.f / length, 435.f / height);
+    float pixelSize = std::min(1100.f / length, 435.f / height);
     float startX = (1180 - pixelSize * length) / 2.f;
     float startY = 100.f;
 
@@ -41,40 +41,40 @@ WolframVisualMenu::WolframVisualMenu(int state, int ruleNumber, int maxDepth, in
 
 void WolframVisualMenu::DisplayContent() const {
     if (this->state == 0) {
-        cout << "<--- Wolfram's Rules Visualization --->\n";
-        cout << "Select (1, 2, 3) to change\nCurrent Settings:\n";
-        cout << "1. Current Rule:" << this->ruleNumber << "\n";
-        cout << "2. Maximum Length:" << this->maxLength << "\n";
-        cout << "3. Maximum Depth:" << this->maxDepth << "\n";
-        cout << "\n4. Generate!\n";
-        cout << "5. Go Back\n";
+       std::cout << "<--- Wolfram's Rules Visualization --->\n";
+       std::cout << "Select (1, 2, 3) to change\nCurrent Settings:\n";
+       std::cout << "1. Current Rule:" << this->ruleNumber << "\n";
+       std::cout << "2. Maximum Length:" << this->maxLength << "\n";
+       std::cout << "3. Maximum Depth:" << this->maxDepth << "\n";
+       std::cout << "\n4. Generate!\n";
+       std::cout << "5. Go Back\n";
     }
     if (this->state == 1) {
-        cout << "<-- Wolfram's Rule " << this->ruleNumber << " -->\n";
-        cout << "1. Next Generation\n";
-        cout << "2. Previous Generation\n";
-        cout << "3. Go to a generation by number\n";
-        cout << "4. Complete all generation\n";
-        cout << "5. Back\n";
+       std::cout << "<-- Wolfram's Rule " << this->ruleNumber << " -->\n";
+       std::cout << "1. Next Generation\n";
+       std::cout << "2. Previous Generation\n";
+       std::cout << "3. Go to a generation by number\n";
+       std::cout << "4. Complete all generation\n";
+       std::cout << "5. Back\n";
 
-        cout << this->ruleSet->getCurrGenNumber() << '\n';
+       std::cout << this->ruleSet->getCurrGenNumber() << '\n';
         //ruleSet->DisplayCurrentGeneration();
-        cout << '\n';
+       std::cout << '\n';
         //ruleSet->DisplayUpToCurrentGeneration();
     }
 }
 
 
 void WolframVisualMenu::DisplayScreen(sf::RenderWindow *window) {
-    vector<string> content(14);
+    std::vector<std::string> content(14);
     content[0] = "<--- Wolfram's Rules Visualization --->\n";
     content[1] = "Select (1 , 2 ,3) to change \nCurrent settings\n";
-    content[2] = "1. Current Rule: " + to_string(this->ruleNumber);
-    content[3] = "\n2. Maximum Length: " + to_string(this->maxLength);
-    content[4] = "\n3. Maximum Depth: " + to_string(this->maxDepth);
+    content[2] = "1. Current Rule: " + std::to_string(this->ruleNumber);
+    content[3] = "\n2. Maximum Length: " + std::to_string(this->maxLength);
+    content[4] = "\n3. Maximum Depth: " + std::to_string(this->maxDepth);
     content[5] = "\n4. Generate";
     content[6] = "\n5. Back\n";
-    content[7] = "<--- Wolfram's Rules " + to_string(this->ruleNumber) + " --->\n";
+    content[7] = "<--- Wolfram's Rules " + std::to_string(this->ruleNumber) + " --->\n";
     content[8] = "1. Next Generation\n";
     content[9] = "2. Previous Generation\n";
     content[10] = "3. Go To A Generation\n   By Number\n";
@@ -82,7 +82,7 @@ void WolframVisualMenu::DisplayScreen(sf::RenderWindow *window) {
     content[12] = "5. Back\n";
     content[13] = "";
 
-    string display;
+    std::string display;
     for (int i = 0; i < 7; i++) {
         display += content[i + this->state * 7];
     }
@@ -114,10 +114,10 @@ void WolframVisualMenu::DisplayScreen(sf::RenderWindow *window) {
 
 
 Menu *WolframVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
-    cout << "\nCurrent Input: ";
-    cout << "I am here\n";
+   std::cout << "\nCurrent Input: ";
+   std::cout << "I am here\n";
 //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-//    cout << "I got out\n";
+//   std::cout << "I got out\n";
 //    if(event->type == sf::Event::Closed)return nullptr;
 //    if(event->type == sf::Event::KeyPressed)input = event->key.code-26;
     ReadFromKeyBoard(&input, window, event, this, 10);
@@ -127,7 +127,7 @@ Menu *WolframVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     int mDep = this->maxDepth;
     int cState = this->state;
     if (this->state == 0) {
-        string temp;
+        std::string temp;
         //int temp = 0;
         //1bool ok;
         sf::Text text;
@@ -139,7 +139,7 @@ Menu *WolframVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
         text.setPosition(25, 550);
 
 
-        string inputMes = "Insert:";
+        std::string inputMes = "Insert:";
         text.setString(inputMes);
         this->DisplayScreen(window);
         window->draw(text);
@@ -147,20 +147,20 @@ Menu *WolframVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
         if (input != "exit") {
             switch (stoi(input)) {
                 case 1:
-                    cout << "Insert new rule number: ";
+                   std::cout << "Insert new rule number: ";
                     ReadFromKeyBoard(&temp, window, event, this, 255);
-                    cout << temp << '\n';
+                   std::cout << temp << '\n';
                     if (temp == "exit")return nullptr;
                     rNum = stoi(temp);
                     break;
                 case 2:
-                    cout << "Insert new maximum length: ";
+                   std::cout << "Insert new maximum length: ";
                     ReadFromKeyBoard(&temp, window, event, this, 1100);
                     if (temp == "exit")return nullptr;
                     mLen = stoi(temp);
                     break;
                 case 3:
-                    cout << "Insert new maximum depth: ";
+                   std::cout << "Insert new maximum depth: ";
                     //window->pollEvent(*event);
                     ReadFromKeyBoard(&temp, window, event, this, 435);
 
@@ -189,16 +189,16 @@ Menu *WolframVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
             switch (stoi(input)) {
                 case 1:
                     ruleSet->CreateNextGen();
-                    cout << ruleSet->getCurrGenNumber() << '\n';
-                    cout << "Next Generation\n";
+                   std::cout << ruleSet->getCurrGenNumber() << '\n';
+                   std::cout << "Next Generation\n";
                     break;
                 case 2:
                     if (ruleSet->getCurrGenNumber() > 0)
                         ruleSet->UpdateCurrGeneration(ruleSet->getCurrGenNumber() - 1);
                     break;
                 case 3: {
-                    string tempInput;
-                    cout << "\nInput the generation number:";
+                    std::string tempInput;
+                   std::cout << "\nInput the generation number:";
                     ReadFromKeyBoard(&tempInput, window, event, this, this->ruleSet->getMaxDepth());
                     ruleSet->UpdateCurrGeneration(stoi(tempInput));
                     break;

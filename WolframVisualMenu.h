@@ -13,7 +13,7 @@
 class WolframVisualMenu : public Menu {
 private:
     int state;
-    string input;
+    std::string input;
     int ruleNumber;
     int maxDepth;
     int maxLength;
@@ -26,7 +26,7 @@ public:
 
     void DisplayContent() const override;
 
-    friend void ReadFromKeyBoard(string *, sf::RenderWindow *, sf::Event *, Menu *, int);
+    friend void ReadFromKeyBoard(std::string *, sf::RenderWindow *, sf::Event *, Menu *, int);
 
     Menu *TakeInput(sf::RenderWindow *, sf::Event *) override;
 };

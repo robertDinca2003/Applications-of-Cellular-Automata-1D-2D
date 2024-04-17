@@ -10,7 +10,6 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-using namespace std;
 
 /// @brief Menu is a class which is used for the navigation menu of the program
 class Menu {
@@ -25,17 +24,17 @@ public:
     virtual Menu *TakeInput(sf::RenderWindow *, sf::Event *) = 0;
 
     /// @brief ReadFromKeyBoard - is a extern function of the class, used to read an input from the keyboard
-    friend void ReadFromKeyBoard(string *, sf::RenderWindow *, sf::Event *, Menu *, int);
+    friend void ReadFromKeyBoard(std::string *, sf::RenderWindow *, sf::Event *, Menu *, int);
 
     Menu() {
-        cout << "Constructed Menu\n";
+        std::cout << "Constructed Menu\n";
     };
 
     /// @brief Deconstruct
-    virtual ~Menu() { cout << "Deconstructed Menu\n"; }
+    virtual ~Menu() { std::cout << "Deconstructed Menu\n"; }
 
     /// @brief operator<<
-    friend ostream &operator<<(ostream &os, const Menu &menu) {
+    friend std::ostream &operator<<(std::ostream &os, const Menu &menu) {
 
         menu.DisplayContent();
         return os;

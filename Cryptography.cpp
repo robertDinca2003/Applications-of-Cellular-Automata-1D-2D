@@ -8,16 +8,16 @@
 
 
 void Cryptography::DisplayContent() const {
-    cout << "<--- Cryptography --->\n";
-    cout << "1. Image Encryption\n";
-    cout << "2. Text Encryption\n";
-    cout << "3. Back\n";
+    std::cout << "<--- Cryptography --->\n";
+    std::cout << "1. Image Encryption\n";
+    std::cout << "2. Text Encryption\n";
+    std::cout << "3. Back\n";
 }
 
 
 void Cryptography::DisplayScreen(sf::RenderWindow *window) {
 
-    vector<string> content(4);
+    std::vector<std::string> content(4);
 
     content[0] = "<--- Cryptography --->\n\n";
     content[1] = "1. Image Encryption\n";
@@ -25,7 +25,7 @@ void Cryptography::DisplayScreen(sf::RenderWindow *window) {
     content[3] = "3. Back\n";
 
 
-    string display;
+    std::string display;
     for (int i = 0; i < 4; i++)
         display += content[i];
 
@@ -46,15 +46,15 @@ void Cryptography::DisplayScreen(sf::RenderWindow *window) {
 
 
 Menu *Cryptography::TakeInput(sf::RenderWindow *window, sf::Event *event) {
-    string input;
-    cout << "I am here\n";
+    std::string input;
+    std::cout << "I am here\n";
     ReadFromKeyBoard(&input, window, event, this, 100);
     //    while(event->type != sf::Event::KeyPressed && event->type != sf::Event::Closed)window->pollEvent(*event);
-//    cout << "I got out\n";
+//   std::cout << "I got out\n";
 //    if(event->type == sf::Event::Closed)return nullptr;
 //    if(event->type == sf::Event::KeyPressed)
 //    {input = to_string(char(event->key.code-26));
-//        cout << event->key.code <<'\n';}
+//       std::cout << event->key.code <<'\n';}
     if (input == "1") {
         //Image
         return new Cryptography();

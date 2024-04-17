@@ -9,7 +9,6 @@
 #include <iostream>
 #include <string>
 #include "CryptMethods.h"
-using namespace std;
 
 
 /// @brief An elementary rule is an 1D automaton, that means a generation is represent by a vector(1D array). Every elementary rule has it's own rule set for creating the next generation. The number of every rule represent the rule set written in a shorter way by the binary representation of the number
@@ -29,14 +28,14 @@ private:
     int maxDepth;
     int nrCurrGen;
     int maxGenerated;
-    vector<int> ruleCod = vector<int>(8);
-    vector<int> startGen;
-    vector<int> currGen;
-    vector<vector<int>> allGenerations;
+    std::vector<int> ruleCod = std::vector<int>(8);
+    std::vector<int> startGen;
+    std::vector<int> currGen;
+    std::vector<std::vector<int>> allGenerations;
 public:
     // Constructors
     /// @brief Constructor based on a specific rule identifier, length and depth
-    explicit ElementaryRule(int ruleNumber = 90, int maxLength = 50, int maxDepth = 30, vector<int> startGen = {-1});
+    explicit ElementaryRule(int ruleNumber = 90, int maxLength = 50, int maxDepth = 30, std::vector<int> startGen = {-1});
 
     /// @brief Copy constructor
     ElementaryRule(const ElementaryRule &);
@@ -47,7 +46,7 @@ public:
 
     // cout <<
     /// @brief operator<<
-    friend ostream &operator<<(ostream &, const ElementaryRule &);
+    friend std::ostream &operator<<(std::ostream &, const ElementaryRule &);
 
     // operator=
     /// @brief operator=
@@ -64,9 +63,9 @@ public:
 
     int getElement(int, int) const;
 
-    vector<int> getCurrGeneration() const;
+    std::vector<int> getCurrGeneration() const;
 
-    vector<int> getStartGen() const;
+    std::vector<int> getStartGen() const;
 
 
     // Setters
@@ -97,7 +96,7 @@ public:
 
     void DisplayAll();
 
-    string CreateCryptMask();
+    std::string CreateCryptMask();
 };
 
 
