@@ -3,14 +3,13 @@
 //
 #include "AlgEncryptText.h"
 #include <iostream>
-#include <fstream>
 //
 //template<typename T>
 //AlgEncryptText<T>::AlgEncryptText(T key, std::string inp) {
 //    this->myKey = key;
 //    this->input = inp;
 //    this->output = "Not Processed yet!";
-//}
+//
 //
 //template<typename T>
 //void AlgEncryptText<T>::doTextEncryption() {

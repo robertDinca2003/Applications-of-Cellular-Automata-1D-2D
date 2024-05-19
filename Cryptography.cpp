@@ -3,8 +3,6 @@
 //
 
 #include "Cryptography.h"
-#include "NewMain.h"
-#include "TextEncryption.h"
 #include "MenuFactory.h"
 
 

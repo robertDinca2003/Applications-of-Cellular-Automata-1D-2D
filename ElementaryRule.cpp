@@ -141,9 +141,9 @@ void ElementaryRule::setMaxDepth(int newMaxDepth) {
     }
     this->maxDepth = newMaxDepth;
     this->allGenerations.resize(this->maxDepth);
-    for(int i = 0 ; i < this->allGenerations.size(); i++)
+    for(size_t i = 0 ; i < this->allGenerations.size(); i++)
     {
-        if(this->allGenerations[i].size() != this->maxLength)
+        if((int)this->allGenerations[i].size() != this->maxLength)
         {
             this->allGenerations[i].resize(this->maxLength);
         }

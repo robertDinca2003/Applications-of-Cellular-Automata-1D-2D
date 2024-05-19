@@ -59,27 +59,27 @@ Menu *Visualization::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     if (input == "1") {
         //Wolfram
        std::cout << "I AM HERE NIGGA\n";
-        return MenuFactory::createMenuInstance(111);;
+        return MenuFactory::createMenuInstance(111);
     }
     if (input == "2") {
         //Conways
-        return MenuFactory::createMenuInstance(112);;
+        return MenuFactory::createMenuInstance(112);
     }
     if (input == "3") {
         //Belousov
-        return MenuFactory::createMenuInstance(113);;
+        return MenuFactory::createMenuInstance(113);
     }
     if (input == "4") {
         //Custom
-        return MenuFactory::createMenuInstance(114);;
+        return MenuFactory::createMenuInstance(114);
     }
     if (input == "5") {
         //Back
-        return MenuFactory::createMenuInstance(1);;
+        return MenuFactory::createMenuInstance(1);
     }
     if (input == "exit")
-        return MenuFactory::createMenuInstance(0);;
+        return MenuFactory::createMenuInstance(0);
 
-    return MenuFactory::createMenuInstance(11);;
+    return MenuFactory::createMenuInstance(11);
 
 }

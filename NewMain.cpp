@@ -65,11 +65,11 @@ Menu *Main::TakeInput(sf::RenderWindow *window, sf::Event *event) {
         return MenuFactory::createMenuInstance(13);
     }
     if (input == "4") {
-        return MenuFactory::createMenuInstance(0);;
+        return MenuFactory::createMenuInstance(0);
     }
     if (input == "exit")
-        return MenuFactory::createMenuInstance(0);;
+        return MenuFactory::createMenuInstance(0);
 
-    return MenuFactory::createMenuInstance(1);;
+    return MenuFactory::createMenuInstance(1);
 
 }
