@@ -300,8 +300,8 @@ TextEncryption::~TextEncryption() {
 
 TextEncryption::TextEncryption(const TextEncryption &other) {
     this->input = other.input;
-    this->rule = other.rule;
-    this->game = other.game;
+    this->rule->operator=( *other.rule);
+    this->game->operator=(* other.game);
     this->message =other.message;
     this->encryptedMessage = other.encryptedMessage;
     this->option = other.option;
