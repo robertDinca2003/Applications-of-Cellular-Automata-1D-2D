@@ -115,7 +115,7 @@ endif()
 ###############################################################################
 
 # external dependencies with find_package
-
+find_package(OpenCV REQUIRED)
 find_package(Threads REQUIRED)
 if(APPLE)
 elseif(UNIX)
@@ -168,6 +168,7 @@ add_executable(${PROJECT_NAME}
         ImageEncryption.h
         AlgEncryptText.h
         AlgEncryptText.cpp
+        ImageEncryption.cpp
 )
 
 ###############################################################################
@@ -206,6 +207,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${SFML_SOURCE_DIR}/include)
 target_link_directories(${PROJECT_NAME} PRIVATE ${SFML_BINARY_DIR}/lib)
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system Threads::Threads)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${OpenCV_LIBS})
 
 if(APPLE)
 elseif(UNIX)

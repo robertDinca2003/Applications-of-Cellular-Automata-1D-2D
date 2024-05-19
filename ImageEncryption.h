@@ -41,8 +41,8 @@ public:
 
     }
 
-    void set_strategy(std::unique_ptr<ImageEncryptionStrategy> &&strategy){
-        this->strategy = std::move(strategy);
+    void set_strategy(std::unique_ptr<ImageEncryptionStrategy> &&sstrategy){
+        this->strategy = std::move(sstrategy);
     }
 
     void LogsFromEncryption(){
