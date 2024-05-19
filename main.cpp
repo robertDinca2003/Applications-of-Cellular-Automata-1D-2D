@@ -18,7 +18,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "Menu.h"
 #include "NewMain.h"
-
+#include "CryptoFactory.h"
 
 //////////////////////////////////////////////////////////////////////
 
@@ -105,6 +105,9 @@ int main() {
     window.draw(text);
     window.display();
 
+    CryptoFactory temp;
+    CryptMethods* met = temp.createCryptMethod(0);
+    delete met;
     runGame(new Main(), &window, &event);
 
 

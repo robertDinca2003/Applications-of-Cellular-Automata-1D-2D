@@ -19,12 +19,17 @@
 
 
 template<> void AlgEncryptText<float>::doTextEncryption() {
-    int Xor1 = *(int*)&myKey >> 24;
-    int Xor2 = *(int*)&myKey << 8 >> 24;
-    int Xor3 = *(int*)&myKey << 16 >> 24;
-    int Xor4 = *(int*)&myKey << 24 >> 24;
+    union {
+        float f;
+        int i;
+    } keyUnion;
+    keyUnion.f = myKey;
+    int Xor1 = keyUnion.i >> 24;
+    int Xor2 = keyUnion.i << 8 >> 24;
+    int Xor3 = keyUnion.i << 16 >> 24;
+    int Xor4 = keyUnion.i << 24 >> 24;
     this->output = this->input;
-    for(int i = 0; i<this->input.size(); i++)
+    for(size_t i = 0; i<this->input.size(); i++)
     {
         if(i % 4 == 0)
         {
@@ -48,7 +53,7 @@ template<> void AlgEncryptText<int>::doTextEncryption() {
     int Xor3 = myKey << 16 >> 24;
     int Xor4 = myKey << 24 >> 24;
     this->output = this->input;
-    for(int i = 0; i<this->input.size(); i++)
+    for(size_t i = 0; i<this->input.size(); i++)
     {
         if(i % 4 == 0)
         {
@@ -69,14 +74,14 @@ template<> void AlgEncryptText<int>::doTextEncryption() {
 template<> void AlgEncryptText<char>::doTextEncryption() {
     int Xor = (int)myKey;
     this->output = this->input;
-    for(int i = 0 ; i<this->input.size(); i++)
+    for(size_t i = 0 ; i<this->input.size(); i++)
     {
         this->output[i] = this->input[i] ^ Xor;
     }
 }
 template<> void AlgEncryptText<std::string>::doTextEncryption() {
     this->output = this->input;
-    for(int i = 0 ; i<this->input.size(); i++)
+    for(size_t i = 0 ; i<this->input.size(); i++)
     {
         this->output[i] = this->input[i] ^ this->myKey[i%this->myKey.size()];
     }

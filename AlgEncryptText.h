@@ -21,7 +21,7 @@ public:
 //
 //
 template<typename T>
-AlgEncryptText<T>::AlgEncryptText(T key, std::string inp) {
+AlgEncryptText<T>::AlgEncryptText(const T key, const std::string inp) {
     this->myKey = key;
     this->input = inp;
     this->output = "Not Processed yet!";
