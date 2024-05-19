@@ -311,7 +311,7 @@ TextEncryption::TextEncryption(const TextEncryption &other) {
 
 TextEncryption &TextEncryption::operator=(const TextEncryption &other) {
     this->input = other.input;
-    this->rule = other.rule;
+    this->rule->operator=(*other.rule) ;
     this->game = other.game;
     this->message =other.message;
     this->encryptedMessage = other.encryptedMessage;
