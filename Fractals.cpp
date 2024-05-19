@@ -3,9 +3,10 @@
 //
 
 #include "Fractals.h"
+#include "MenuFactory.h"
 
 
-void Fractal::DisplayContent() const {
+void Fractals::DisplayContent() const {
     std::cout << "<--- Fractals --->\n";
     std::cout << "1. Wolfram's Elementary Rules\n";
     std::cout << "2. More Fractals\n";
@@ -13,7 +14,7 @@ void Fractal::DisplayContent() const {
 }
 
 
-void Fractal::DisplayScreen(sf::RenderWindow *window) {
+void Fractals::DisplayScreen(sf::RenderWindow *window) {
     std::vector<std::string> content(4);
     content[0] = "<--- Fractals --->\n";
     content[1] = "1. Wolfram's Elementary Rules\n";
@@ -42,7 +43,7 @@ void Fractal::DisplayScreen(sf::RenderWindow *window) {
 }
 
 
-Menu *Fractal::TakeInput(sf::RenderWindow *window, sf::Event *event) {
+Menu *Fractals::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     std::string input;
     std::cout << "I am here\n";
     ReadFromKeyBoard(&input, window, event, this, 100);
@@ -54,19 +55,19 @@ Menu *Fractal::TakeInput(sf::RenderWindow *window, sf::Event *event) {
 //       std::cout << event->key.code <<'\n';}
     if (input == "1") {
         //Wolfram
-        return new Fractal();
+        return MenuFactory::createMenuInstance(131);
     }
     if (input == "2") {
         //More
-        return new Fractal();
+        return MenuFactory::createMenuInstance(132);
     }
     if (input == "3") {
         //Back
-        return new Main();
+        return MenuFactory::createMenuInstance(1);
     }
     if (input == "exit")
         return nullptr;
 
-    return new Fractal();
+    return MenuFactory::createMenuInstance(13);
 
 }

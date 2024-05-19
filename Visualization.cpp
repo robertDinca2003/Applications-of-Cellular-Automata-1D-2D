@@ -2,6 +2,7 @@
 // Created by robert on 03.04.2024.
 //
 #include "Visualization.h"
+#include "MenuFactory.h"
 
 void Visualization::DisplayContent() const {
    std::cout << "<--- Visualizations --->\n";
@@ -58,27 +59,27 @@ Menu *Visualization::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     if (input == "1") {
         //Wolfram
        std::cout << "I AM HERE NIGGA\n";
-        return new WolframVisualMenu();
+        return MenuFactory::createMenuInstance(111);;
     }
     if (input == "2") {
         //Conways
-        return new ConwaysVisualMenu();
+        return MenuFactory::createMenuInstance(112);;
     }
     if (input == "3") {
         //Belousov
-        return new BelousovVisualMenu();
+        return MenuFactory::createMenuInstance(113);;
     }
     if (input == "4") {
         //Custom
-        return new Custom2DMenu();
+        return MenuFactory::createMenuInstance(114);;
     }
     if (input == "5") {
         //Back
-        return new Main();
+        return MenuFactory::createMenuInstance(1);;
     }
     if (input == "exit")
-        return nullptr;
+        return MenuFactory::createMenuInstance(0);;
 
-    return new Visualization();
+    return MenuFactory::createMenuInstance(11);;
 
 }

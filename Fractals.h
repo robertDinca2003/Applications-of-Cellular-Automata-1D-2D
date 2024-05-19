@@ -8,8 +8,8 @@
 #include "Menu.h"
 #include "NewMain.h"
 
-/// @brief Fractal - represent a submenu, containing different types of fractals
-class Fractal : public Menu {
+/// @brief Fractals - represent a submenu, containing different types of fractals
+class Fractals : public Menu {
     void DisplayContent() const override;
 
     void DisplayScreen(sf::RenderWindow *) override;

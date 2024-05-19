@@ -5,6 +5,7 @@
 #include "Cryptography.h"
 #include "NewMain.h"
 #include "TextEncryption.h"
+#include "MenuFactory.h"
 
 
 void Cryptography::DisplayContent() const {
@@ -57,19 +58,19 @@ Menu *Cryptography::TakeInput(sf::RenderWindow *window, sf::Event *event) {
 //       std::cout << event->key.code <<'\n';}
     if (input == "1") {
         //Image
-        return new Cryptography();
+        return MenuFactory::createMenuInstance(121);
     }
     if (input == "2") {
         //Text
-        return new TextEncryption();
+        return MenuFactory::createMenuInstance(122);
     }
     if (input == "3") {
         //Back
-        return new Main();
+        return MenuFactory::createMenuInstance(1);
     }
     if (input == "exit")
-        return nullptr;
+        return MenuFactory::createMenuInstance(0);
 
-    return new Cryptography();
+    return MenuFactory::createMenuInstance(12);
 
 }

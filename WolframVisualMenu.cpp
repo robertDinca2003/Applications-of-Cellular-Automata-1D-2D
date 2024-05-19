@@ -3,6 +3,7 @@
 //
 
 #include "WolframVisualMenu.h"
+#include "MenuFactory.h"
 
 
 void DisplayBufferContent(ElementaryRule *ruleSet, sf::RenderWindow *window) {
@@ -214,13 +215,13 @@ Menu *WolframVisualMenu::TakeInput(sf::RenderWindow *window, sf::Event *event) {
                     break;
             }
         } else {
-            return nullptr;
+            return MenuFactory::createMenuInstance(0);
         }
 
 
         return new WolframVisualMenu(cState, rNum, mDep, mLen, this->ruleSet);
     }
     delete this->ruleSet;
-    return new WolframVisualMenu();
+    return MenuFactory::createMenuInstance(111);
 }
 

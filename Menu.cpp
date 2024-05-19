@@ -4,7 +4,7 @@
 #include <chrono>
 #include "MyTools.cpp"
 #include "Menu.h"
-
+#include "MenuFactory.h"
 
 void ReadFromKeyBoard(std::string *input, sf::RenderWindow *window, sf::Event *event, Menu *men, int maxim) {
     int temp = 0;

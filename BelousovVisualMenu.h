@@ -9,6 +9,7 @@
 #include "Visualization.h"
 #include "Belousov.h"
 
+/// @brief BelousovVisualMenu - represent a submenu which let the user to change the values of a Belousov
 class BelousovVisualMenu : public Menu {
 private:
     int state;

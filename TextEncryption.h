@@ -35,7 +35,7 @@ public:
 
     static int getOption();
 
-    void Encrypt();
+    void Encrypt(int );
 
     void Decrypt();
 

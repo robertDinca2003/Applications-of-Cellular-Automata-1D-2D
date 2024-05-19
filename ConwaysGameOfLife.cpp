@@ -9,6 +9,10 @@ ConwaysGameOfLife::ConwaysGameOfLife() {
    std::cout << "Constructed Game of Life\n";
     this->height = 500;
     this->length = 1100;
+    this->matrix.resize(502);
+    this->copyMat.resize(1102);
+    for(int i = 0 ; i < 502; i++){
+        this->matrix[i].resize(1102);this->copyMat[i].resize(1102);}
     for (int i = 0; i < 502; i++)
         for (int j = 0; j < 1102; j++)
             this->matrix[i][j] = this->copyMat[i][j] = 0;
@@ -24,6 +28,10 @@ ConwaysGameOfLife::ConwaysGameOfLife(int initialNumberCells, int height, int len
     this->height = height;
     this->length = length;
     this->initialNumberCells = initialNumberCells;
+    this->matrix.resize(502);
+    this->copyMat.resize(1102);
+    for(int i = 0 ; i < 502; i++){
+        this->matrix[i].resize(1102);this->copyMat[i].resize(1102);}
     for (int i = 0; i < this->height + 2; i++)
         for (int j = 0; j < this->length + 2; j++)
             this->matrix[i][j] = this->copyMat[i][j] = 0;
@@ -34,6 +42,10 @@ ConwaysGameOfLife::ConwaysGameOfLife(int initialNumberCells, int height, int len
 }
 
 ConwaysGameOfLife::ConwaysGameOfLife(int mat[502][1102]) {
+    this->matrix.resize(502);
+    this->copyMat.resize(1102);
+    for(int i = 0 ; i < 502; i++){
+        this->matrix[i].resize(1102);this->copyMat[i].resize(1102);}
     int initCellNumber = 0;
    std::cout << "Constructed Game of Life\n";
     for (int i = 0; i < 502; i++)
@@ -145,4 +157,8 @@ void ConwaysGameOfLife::setHeight(int h) {
 
 std::string ConwaysGameOfLife::CreateCryptMask() {
     return "";
+}
+
+int ConwaysGameOfLife::getElement(int i, int j) const {
+    return this->matrix[i][j];
 }

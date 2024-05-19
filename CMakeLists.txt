@@ -162,6 +162,12 @@ add_executable(${PROJECT_NAME}
         TextEncryption.cpp
         CryptMethods.h
         CryptMethods.cpp
+        CryptoFactory.h
+        CryptoFactory.cpp
+        MenuFactory.h
+        ImageEncryption.h
+        AlgEncryptText.h
+        AlgEncryptText.cpp
 )
 
 ###############################################################################

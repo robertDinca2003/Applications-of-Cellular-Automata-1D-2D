@@ -141,6 +141,13 @@ void ElementaryRule::setMaxDepth(int newMaxDepth) {
     }
     this->maxDepth = newMaxDepth;
     this->allGenerations.resize(this->maxDepth);
+    for(int i = 0 ; i < this->allGenerations.size(); i++)
+    {
+        if(this->allGenerations[i].size() != this->maxLength)
+        {
+            this->allGenerations[i].resize(this->maxLength);
+        }
+    }
 
 }
 
@@ -245,5 +252,30 @@ void ElementaryRule::setRuleNumber(int ruleNum) {
 }
 
 std::string ElementaryRule::CreateCryptMask() {
-    return "";
+    std::cout <<"i am outputed\n";
+    int height = this->getMaxDepth()-1;
+    int length = this->getMaxLength();
+    int startPoint = length - (1+height*2);
+    if(startPoint < 0) startPoint = 0;
+    char byte=0;
+    int cnt = 8;
+    std::string output = "";
+    this->GenerateToMaxDepth();
+    for(int i = startPoint ; i < std::min(startPoint + (height)*2,length); i++)
+    {
+        std::cout << i << "\n";
+        if(cnt == 0){
+            output.push_back(byte);
+            byte = 0;
+            cnt = 8;
+        }
+
+        byte = byte ^ (this->getElement(height,i) << (i%8));
+
+        cnt--;
+    }
+    if(cnt != 8)
+        output.push_back(byte);
+    std::cout << output<<"\ni am outputed\n";
+    return output;
 }

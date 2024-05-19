@@ -3,6 +3,7 @@
 //
 
 #include "NewMain.h"
+#include "MenuFactory.h"
 
 
 void Main::DisplayContent() const {
@@ -55,20 +56,20 @@ Menu *Main::TakeInput(sf::RenderWindow *window, sf::Event *event) {
 //       std::cout << event->key.code <<'\n';}
 //    else input = "-1";
     if (input == "1") {
-        return new Visualization();
+        return MenuFactory::createMenuInstance(11);
     }
     if (input == "2") {
-        return new Cryptography;
+        return MenuFactory::createMenuInstance(12);
     }
     if (input == "3") {
-        return new Fractal();
+        return MenuFactory::createMenuInstance(13);
     }
     if (input == "4") {
-        return nullptr;
+        return MenuFactory::createMenuInstance(0);;
     }
     if (input == "exit")
-        return nullptr;
+        return MenuFactory::createMenuInstance(0);;
 
-    return new Main();
+    return MenuFactory::createMenuInstance(1);;
 
 }

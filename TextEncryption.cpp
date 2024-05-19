@@ -2,8 +2,11 @@
 // Created by robert on 16.04.2024.
 //
 
+#include <fstream>
 #include "TextEncryption.h"
 #include "Cryptography.h"
+#include "MenuFactory.h"
+#include "AlgEncryptText.h"
 
 int TextEncryption::option = -1;
 
@@ -15,19 +18,19 @@ int TextEncryption::getOption() {
     return TextEncryption::option;
 }
 
-TextEncryption::TextEncryption() {
+TextEncryption::TextEncryption(): rule(new ElementaryRule(30)), game(new ConwaysGameOfLife()) {
 
     //this->option = -1;
     this->message = "Message";
     this->input = "";
     this->encryptedMessage = this->message;
-    ElementaryRule temp =  ElementaryRule(30) ;
-    this->rule = &temp;
-    ConwaysGameOfLife temp2 = ConwaysGameOfLife(200,100,100) ;
-    this->game = &temp2;
-    this->processes.push_back(this->rule);
-    this->processes.push_back(this->game);
-    std::cout<<this->rule->CreateCryptMask()<< ' ' << this->game->CreateCryptMask() << '\n';
+//    ElementaryRule temp =  ElementaryRule(30) ;
+//    this->rule = &temp;
+//    ConwaysGameOfLife temp2(200,100,100);
+//    this->game = &temp2;
+//    this->processes.push_back(this->rule);
+//    this->processes.push_back(this->game);
+//    std::cout<<this->rule->CreateCryptMask()<< ' ' << this->game->CreateCryptMask() << '\n';
 }
 
 
@@ -43,13 +46,61 @@ TextEncryption::TextEncryption(ElementaryRule *rule, ConwaysGameOfLife *game, st
 
 
 
-void TextEncryption::Encrypt() {
+void TextEncryption::Encrypt(int opt = 0) {
+    if(option == -1)
+        return;
+    std::vector<std::string> keys;
+    std::cout << "is in encrypt\n";
+    std::string name;
+    if(opt == 0)
+        name = "encryptionRules.txt";
+    else
+        name = "decryptionRules.txt";
+    std::ofstream fout(name);
+    for(size_t i = 0; i < this->processes.size(); i++)
+    {
 
+        if(dynamic_cast<ElementaryRule*>(this->processes[i]))
+        {
+            if(option == -1 || option == 1) continue;
+            std::cout << "i am elementary\n";
+            ElementaryRule * temp = dynamic_cast<ElementaryRule*>(this->processes[i]);
+            fout << "Elementary Rule: " <<  temp->getRuleNumber() << " " << temp->getMaxLength() << " " << temp->getMaxDepth() << "\n";
+            keys.push_back(dynamic_cast<ElementaryRule*>(this->processes[i])->CreateCryptMask());
+        }
+        else
+        {
+            if(option == -1 || option == 0)
+                continue;
+            std::cout << "i am conway\n";
+            ConwaysGameOfLife * temp = dynamic_cast<ConwaysGameOfLife*>(this->processes[i]);
+            fout << "Conway game of life: " <<  temp->getHeight() << " " << temp->getLength() << "\n";
+            for(int x = 0 ; x < temp->getHeight(); x++)
+            {
+                for(int y = 0 ; y< temp->getLength(); y++)
+                {
+                    fout << temp->getElement(x,y) << " ";
+                }
+                fout << "\n";
+            }
+            keys.push_back(dynamic_cast<ConwaysGameOfLife*>(this->processes[i])->CreateCryptMask());
+        }
+    }
+    for(auto key : keys)
+    {
+        std::cout << "this key: " << key << '\n';
+        AlgEncryptText<std::string> encryptionAlgorithm(key,this->message);
+        encryptionAlgorithm.doTextEncryption();
+        this->message = encryptionAlgorithm.getOutput();
 
+    }
+    std::ofstream f("encryptedMessage.txt");
+    f << this->message;
 }
 
 void TextEncryption::Decrypt() {
 
+    this->Encrypt();
 
 }
 
@@ -58,7 +109,7 @@ void TextEncryption::DisplayScreen(sf::RenderWindow *window) {
     std::string content[9];
     content[0] = "<--- Text Encryption --->\n";
     content[1] = "1. Set Message: " + this->message + "\n";
-    content[2] = "2. Use Wolfram Rule:\n   3. Rule - " + std::to_string(this->rule->getRuleNumber()) + "  4. Max Width - "+ std::to_string(this->rule->getMaxLength()) + "\n   5. Generation Number - " + std::to_string(this->rule->getCurrGenNumber());
+    content[2] = "2. Use Wolfram Rule:\n   3. Rule - " + std::to_string(this->rule->getRuleNumber()) + "  4. Max Width - "+ std::to_string(this->rule->getMaxLength()) + "\n   5. Max Depth Number - " + std::to_string(this->rule->getMaxDepth());
     content[3] = "\n6. Add Elementary Rule\n7. Use Conway's Game of Life:\n   8. Width - " + std::to_string(this->game->getLength()) + "  9. Height - " +
             std::to_string(this->game->getHeight()) + "\n";
     content[4] = "10. Add Conways' game\n11. Use Both\n12. Encrypt\n";
@@ -122,7 +173,7 @@ void TextEncryption::DisplayScreen(sf::RenderWindow *window) {
 void TextEncryption::DisplayContent() const {
    std::cout << "<--- Text Encryption --->\n";
    std::cout << "1. Set Message: " << this->message << '\n';
-   std::cout << "2. Use Wolfram Rule: Rule - " <<this->rule->getRuleNumber()<<"Max Width: - " << this->rule->getMaxLength() << "Generation Number"<< this->rule->getCurrGenNumber() <<"\n";
+   std::cout << "2. Use Wolfram Rule: Rule - " <<this->rule->getRuleNumber()<<"Max Width: - " << this->rule->getMaxLength() << "Generation Max Depth"<< this->rule->getMaxDepth() <<"\n";
    std::cout << "3. Use Conways's Game of Life:\n"<< "   Width: "<<this->game->getLength() << "Height: " << this->game->getHeight() <<"\n";
    std::cout << "4. Encrypt";
    std::cout << "5. Decrypt";
@@ -141,6 +192,8 @@ Menu *TextEncryption::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     }
     else if(this->input == "1")
     {
+        std::ifstream fin("messageInput.txt");
+        fin >> this->message;
     }
     else if(this->input == "2"){
         this->setOption(0);
@@ -173,7 +226,7 @@ Menu *TextEncryption::TakeInput(sf::RenderWindow *window, sf::Event *event) {
             delete this->game;
             return nullptr;
         }
-        this->rule->setMaxDepth(155);
+        this->rule->setMaxDepth(stoi(input));
     }
     else if(this->input=="6"){
         ElementaryRule* newRule = new ElementaryRule(*this->rule);
@@ -209,6 +262,7 @@ Menu *TextEncryption::TakeInput(sf::RenderWindow *window, sf::Event *event) {
             ConwaysGameOfLife* newGame = new ConwaysGameOfLife();
             *newGame = *this->game;
             this->processes.push_back(newGame);
+            std::cout << "Just added conway\n";
         }
         catch (const std::exception &e){
            std::cout << "Exception: " << e.what() << '\n';
@@ -227,13 +281,20 @@ Menu *TextEncryption::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     else if(this->input == "14"){
         delete this->rule;
         delete this->game;
-        return new Cryptography();
+        for(size_t i = 0 ; i<this->processes.size(); i++)
+            delete this->processes[i];
+        return MenuFactory::createMenuInstance(12);
     }
 
     return new TextEncryption(this->rule,this->game,this->processes, this->message);
 }
 
 TextEncryption::~TextEncryption() {
+//    if(this->game != nullptr)
+//    delete this->game;
+//    if(this->rule != nullptr)
+//    delete this->rule;
+
 
 }
 
