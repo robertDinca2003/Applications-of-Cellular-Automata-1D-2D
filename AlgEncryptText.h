@@ -34,10 +34,24 @@ void AlgEncryptText<T>::doTextEncryption()
 }
 //
 //
+//template<>
+//void AlgEncryptText<float>::doTextEncryption() ;
+//extern template class AlgEncryptText<float>;
+//extern template class AlgEncryptText<char>;
+//extern template class AlgEncryptText<int>;
 template<>
-void AlgEncryptText<float>::doTextEncryption() ;
+void AlgEncryptText<float>::doTextEncryption();
+template<>
+void AlgEncryptText<int>::doTextEncryption();
+template<>
+void AlgEncryptText<char>::doTextEncryption();
+template<>
+void AlgEncryptText<std::string>::doTextEncryption();
 
-
+template<typename T>
+std::string AlgEncryptText<T>::getOutput() {
+    return output;
+}
 
 
 #endif //OOP_ALGENCRYPTTEXT_H

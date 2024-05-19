@@ -15,8 +15,8 @@
 //void AlgEncryptText<T>::doTextEncryption() {
 //    std::cout << "This type of key cannot be processed!\n";
 //}
-
-
+//
+//
 template<> void AlgEncryptText<float>::doTextEncryption() {
     union {
         float f;
@@ -46,6 +46,9 @@ template<> void AlgEncryptText<float>::doTextEncryption() {
         }
     }
 }
+
+template class AlgEncryptText<float>;
+
 template<> void AlgEncryptText<int>::doTextEncryption() {
     int Xor1 = myKey >> 24;
     int Xor2 = myKey << 8 >> 24;
@@ -70,6 +73,8 @@ template<> void AlgEncryptText<int>::doTextEncryption() {
         }
     }
 }
+template class AlgEncryptText<int>;
+
 template<> void AlgEncryptText<char>::doTextEncryption() {
     int Xor = (int)myKey;
     this->output = this->input;
@@ -78,6 +83,9 @@ template<> void AlgEncryptText<char>::doTextEncryption() {
         this->output[i] = this->input[i] ^ Xor;
     }
 }
+
+template class AlgEncryptText<char>;
+
 template<> void AlgEncryptText<std::string>::doTextEncryption() {
     this->output = this->input;
     for(size_t i = 0 ; i<this->input.size(); i++)
@@ -86,23 +94,5 @@ template<> void AlgEncryptText<std::string>::doTextEncryption() {
     }
 }
 
+template class AlgEncryptText<std::string>;
 
-template<>
-std::string AlgEncryptText<int>::getOutput() {
-    return this->output;
-}
-
-template<>
-std::string AlgEncryptText<float>::getOutput() {
-    return this->output;
-}
-
-template<>
-std::string AlgEncryptText<char>::getOutput() {
-    return this->output;
-}
-
-template<>
-std::string AlgEncryptText<std::string>::getOutput() {
-    return this->output;
-}
