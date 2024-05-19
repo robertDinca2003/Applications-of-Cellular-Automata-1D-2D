@@ -298,5 +298,29 @@ TextEncryption::~TextEncryption() {
 
 }
 
+TextEncryption::TextEncryption(const TextEncryption &other) {
+    this->input = other.input;
+    this->rule = other.rule;
+    this->game = other.game;
+    this->message =other.message;
+    this->encryptedMessage = other.encryptedMessage;
+    this->option = other.option;
+    for(size_t i = 0 ; i< other.processes.size(); i++)
+        this->processes.push_back(other.processes[i]);
+}
+
+TextEncryption &TextEncryption::operator=(const TextEncryption &other) {
+    this->input = other.input;
+    this->rule = other.rule;
+    this->game = other.game;
+    this->message =other.message;
+    this->encryptedMessage = other.encryptedMessage;
+    this->option = other.option;
+    for(size_t i = 0 ; i< other.processes.size(); i++)
+        this->processes.push_back(other.processes[i]);
+
+    return *this;
+}
+
 
 

@@ -25,7 +25,9 @@ public:
 
     TextEncryption();
 
-//    TextEncryption(const TextEncryption&) = default;
+    TextEncryption(const TextEncryption&);
+
+    TextEncryption &operator=(const TextEncryption &);
 
     TextEncryption(ElementaryRule *, ConwaysGameOfLife *, std::vector<CryptMethods *>, std::string);
 

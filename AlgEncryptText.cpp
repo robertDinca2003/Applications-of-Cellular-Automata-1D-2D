@@ -35,14 +35,14 @@ template<> void AlgEncryptText<float>::doTextEncryption() {
         {
             this->output[i] = this->input[i] ^ Xor1;
         }
-        else if(i % 4 == 1)
+        if(i % 4 == 1)
         {
             this->output[i] = this->input[i] ^ Xor2;
         }
-        else if(i % 4 == 2){
+        if(i % 4 == 2){
             this->output[i] = this->input[i] ^ Xor3;
         }
-        else if(i%4 == 3){
+        if(i%4 == 3){
             this->output[i] = this->input[i] ^ Xor4;
         }
     }
@@ -59,14 +59,14 @@ template<> void AlgEncryptText<int>::doTextEncryption() {
         {
             this->output[i] = this->input[i] ^ Xor1;
         }
-        else if(i % 4 == 1)
+        if(i % 4 == 1)
         {
             this->output[i] = this->input[i] ^ Xor2;
         }
-        else if(i % 4 == 2){
+        if(i % 4 == 2){
             this->output[i] = this->input[i] ^ Xor3;
         }
-        else if(i%4 == 3){
+        if(i%4 == 3){
             this->output[i] = this->input[i] ^ Xor4;
         }
     }
