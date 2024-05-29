@@ -29,7 +29,6 @@ env:
   BIN_DIR: "bin"
   GEN_DIR: "generated"
   APP_WINDOW: "My Window"
-  OPENCV_DIR: "/usr/local/lib/cmake/opencv4"
 
 defaults:
   run:
@@ -133,7 +132,7 @@ jobs:
     env:
       CC: ${{ matrix.c }}
       CXX: ${{ matrix.cxx }}
-      OpenCV_DIR: ${{ env.OpenCV_DIR }}
+
       # NOTE: also update in CMakeLists FetchContent
       SFML_VERSION: "2023-11-04-2.6.1"
 
@@ -266,10 +265,10 @@ jobs:
         run: |
           choco install ninja
 
-      - name: Install OpenCV (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          choco install opencv
+#      - name: Install OpenCV (Windows)
+#        if: runner.os == 'Windows'
+#        run: |
+#          choco install opencv
 
       - name: Install valgrind
         if: runner.os == 'Linux' && matrix.runs_valgrind == true
