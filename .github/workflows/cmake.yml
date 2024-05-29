@@ -270,11 +270,12 @@ jobs:
       #     # sudo apt-get update
       #     sudo apt-get install --no-install-recommends ninja-build libc++-${{ matrix.clang_ver }}-dev libc++abi-${{ matrix.clang_ver }}-dev
 
-      - name: Install Opencv (Windows)
+      - name: Install OpenCV (Windows)
         if: runner.os == 'Windows'
         run: |
-          choco install opencv
+          choco install opencv --params "/InstallDir:C:\tools"
           echo "OPENCV_DIR=C:/tools/opencv/build/x64/vc15" >> $GITHUB_ENV
+
 
       - name: Set OpenCV_DIR for CMake
         if: runner.os == 'Windows'
