@@ -135,7 +135,7 @@ void StrategyBlackWhite::doEncryption() {
 
 void StrategyBlackWhite::doDecryption() {
     std::vector<std::vector<int>> matrix;
-    std::vector<std::vector<int>> outputMat;
+//    std::vector<std::vector<int>> outputMat;
     readData(matrix, 1);
     ElementaryRule rule(30, matrix[0].size() / 2, matrix.size() * 3 / 4 + 1);
     rule.GenerateToMaxDepth();

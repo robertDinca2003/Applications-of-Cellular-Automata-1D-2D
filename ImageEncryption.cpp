@@ -12,6 +12,7 @@
 ImageEncryption::ImageEncryption() {
     this->input = "";
     this->option = 0;
+    this->mode = 0;
 }
 
 ImageEncryption::ImageEncryption(int opt, int mod) {
