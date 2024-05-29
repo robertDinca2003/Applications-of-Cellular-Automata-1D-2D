@@ -49,6 +49,8 @@ void StrategyColor::combineShares(const cv::Mat &share1R, const cv::Mat &share1G
 }
 
 void StrategyColor::readData(std::vector<std::vector<int>> &myMat, int opt) {
+    for(auto v : myMat)
+        std::cout << opt;
 
 }
 
