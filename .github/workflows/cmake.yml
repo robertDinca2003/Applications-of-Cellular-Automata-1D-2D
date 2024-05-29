@@ -109,6 +109,11 @@ jobs:
         if: runner.os == 'Linux'
         uses: ./.github/actions/install-linux-deps
 
+      - name: Install opencv
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install --no-install-recommends libopencv-dev
+
       - name: Configure CMake
         uses: ./.github/actions/configure-cmake
         with:

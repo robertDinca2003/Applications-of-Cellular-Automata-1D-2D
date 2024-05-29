@@ -120,6 +120,7 @@ Menu *ImageEncryption::TakeInput(sf::RenderWindow *window, sf::Event *event) {
         }
 
         cont.useStrategy(this->mode);
+        cont.LogsFromEncryption();
     } else if (this->input == "5") {
         return MenuFactory::createMenuInstance(12);
     }
