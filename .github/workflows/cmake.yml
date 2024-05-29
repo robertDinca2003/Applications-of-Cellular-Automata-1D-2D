@@ -260,6 +260,11 @@ jobs:
       #     # sudo apt-get update
       #     sudo apt-get install --no-install-recommends ninja-build libc++-${{ matrix.clang_ver }}-dev libc++abi-${{ matrix.clang_ver }}-dev
 
+      - name: Install Opencv (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          choco install opencv
+
       - name: Install ninja (Windows)
         if: runner.os == 'Windows'
         run: |
