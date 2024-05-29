@@ -169,6 +169,14 @@ add_executable(${PROJECT_NAME}
         AlgEncryptText.h
         AlgEncryptText.cpp
         ImageEncryption.cpp
+        StrategyBlackWhite.h
+        StrategyBlackWhite.cpp
+        StrategyColor.cpp
+        ImageEncryptionStrategy.h
+        ImageEncryptionStrategy.cpp
+        ImageEncryptionContext.h
+        ImageEncryptionContext.cpp
+        MenuFactory.cpp
 )
 
 ###############################################################################

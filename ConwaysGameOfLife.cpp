@@ -156,7 +156,29 @@ void ConwaysGameOfLife::setHeight(int h) {
 }
 
 std::string ConwaysGameOfLife::CreateCryptMask() {
-    return "";
+    std::string output = "";
+    int cnt = 7;
+    char byte = 0;
+    for(size_t i = 0 ; i< this->matrix.size(); i++)
+    {
+        for(size_t j = 0 ; j< this->matrix[0].size(); j++)
+        {
+            if(cnt == 0){
+                output.push_back(byte);
+                byte = 0;
+                cnt = 7;
+            }
+
+            byte = byte ^ (this->getElement(i,j) << ((i*this->matrix[0].size() + j)%7));
+
+            cnt--;
+        }
+    }
+    if(cnt != 7)
+    {
+        output.push_back(byte);
+    }
+    return output;
 }
 
 int ConwaysGameOfLife::getElement(int i, int j) const {

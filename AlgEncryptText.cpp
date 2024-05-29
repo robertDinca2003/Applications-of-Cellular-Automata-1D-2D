@@ -96,3 +96,21 @@ template<> void AlgEncryptText<std::string>::doTextEncryption() {
 
 template class AlgEncryptText<std::string>;
 
+
+template<typename T>
+AlgEncryptText<T>::AlgEncryptText(const T key, const std::string inp) {
+    this->myKey = key;
+    this->input = inp;
+    this->output = "Not Processed yet!";
+}
+
+template<typename T>
+void AlgEncryptText<T>::doTextEncryption()
+{
+    std::cout << "This type of key cannot be processed!\n";
+}
+
+template<typename T>
+std::string AlgEncryptText<T>::getOutput() {
+    return output;
+}

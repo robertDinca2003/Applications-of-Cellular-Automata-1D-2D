@@ -95,7 +95,9 @@ void TextEncryption::Encrypt(int opt = 0) {
 
     }
     std::ofstream f("encryptedMessage.txt");
-    f << this->message;
+    f << this->message << "\n";
+    for(size_t i = 0 ; i< this->message.size(); i++)
+        f << (int)this->message[i] << " " ;
 }
 
 void TextEncryption::Decrypt() {
@@ -194,6 +196,10 @@ Menu *TextEncryption::TakeInput(sf::RenderWindow *window, sf::Event *event) {
     {
         std::ifstream fin("messageInput.txt");
         fin >> this->message;
+        std::ofstream f("encryptedMessage.txt");
+        f << this->message << "\n";
+        for(size_t i = 0 ; i< this->message.size(); i++)
+            f << (int)this->message[i] << " " ;
     }
     else if(this->input == "2"){
         this->setOption(0);

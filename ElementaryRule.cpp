@@ -258,7 +258,7 @@ std::string ElementaryRule::CreateCryptMask() {
     int startPoint = length - (1+height*2);
     if(startPoint < 0) startPoint = 0;
     char byte=0;
-    int cnt = 8;
+    int cnt = 7;
     std::string output = "";
     this->GenerateToMaxDepth();
     for(int i = startPoint ; i < std::min(startPoint + (height)*2,length); i++)
@@ -267,14 +267,14 @@ std::string ElementaryRule::CreateCryptMask() {
         if(cnt == 0){
             output.push_back(byte);
             byte = 0;
-            cnt = 8;
+            cnt = 7;
         }
 
-        byte = byte ^ (this->getElement(height,i) << (i%8));
+        byte = byte ^ (this->getElement(height,i) << (i%7));
 
         cnt--;
     }
-    if(cnt != 8)
+    if(cnt != 7)
         output.push_back(byte);
     std::cout << output<<"\ni am outputed\n";
     return output;

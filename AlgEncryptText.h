@@ -18,27 +18,7 @@ public:
 
     std::string getOutput();
 };
-//
-//
-template<typename T>
-AlgEncryptText<T>::AlgEncryptText(const T key, const std::string inp) {
-    this->myKey = key;
-    this->input = inp;
-    this->output = "Not Processed yet!";
-}
-//
-template<typename T>
-void AlgEncryptText<T>::doTextEncryption()
-{
-    std::cout << "This type of key cannot be processed!\n";
-}
-//
-//
-//template<>
-//void AlgEncryptText<float>::doTextEncryption() ;
-//extern template class AlgEncryptText<float>;
-//extern template class AlgEncryptText<char>;
-//extern template class AlgEncryptText<int>;
+
 template<>
 void AlgEncryptText<float>::doTextEncryption();
 template<>
@@ -48,10 +28,36 @@ void AlgEncryptText<char>::doTextEncryption();
 template<>
 void AlgEncryptText<std::string>::doTextEncryption();
 
-template<typename T>
-std::string AlgEncryptText<T>::getOutput() {
-    return output;
-}
+//
+//
+//template<typename T>
+//AlgEncryptText<T>::AlgEncryptText(const T key, const std::string inp) {
+//    this->myKey = key;
+//    this->input = inp;
+//    this->output = "Not Processed yet!";
+//}
+//
+//template<typename T>
+//void AlgEncryptText<T>::doTextEncryption()
+//{
+//    std::cout << "This type of key cannot be processed!\n";
+//}
+//
+//template<typename T>
+//std::string AlgEncryptText<T>::getOutput() {
+//    return output;
+//}
+
+//
+//
+//template<>
+//void AlgEncryptText<float>::doTextEncryption() ;
+//extern template class AlgEncryptText<float>;
+//extern template class AlgEncryptText<char>;
+//extern template class AlgEncryptText<int>;
+
+
+
 
 
 #endif //OOP_ALGENCRYPTTEXT_H
