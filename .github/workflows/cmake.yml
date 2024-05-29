@@ -50,6 +50,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends cppcheck
 
+      - name: Install opencv
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install --no-install-recommends libopencv-dev
+
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
         uses: ./.github/actions/install-linux-deps
