@@ -17,7 +17,5 @@ runs:
           libdrm-dev \
           libgbm-dev \
           libfreetype6-dev \
-          libopencv-dev \
-        
           xorg
       shell: bash
