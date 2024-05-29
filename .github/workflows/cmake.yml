@@ -274,6 +274,11 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           choco install opencv
+          echo "OPENCV_DIR=C:/tools/opencv/build/x64/vc15" >> $GITHUB_EN
+
+      - name: Set OpenCV_DIR for CMake
+        if: runner.os == 'Windows'
+        run: echo "OpenCV_DIR=$OPENCV_DIR" >> $GITHUB_ENV
 
       - name: Install ninja (Windows)
         if: runner.os == 'Windows'
