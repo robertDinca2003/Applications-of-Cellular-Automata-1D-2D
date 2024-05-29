@@ -265,6 +265,12 @@ jobs:
         run: |
           choco install ninja
 
+      - name: Install OpenCV (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends libopencv-dev
+
       - name: Install valgrind
         if: runner.os == 'Linux' && matrix.runs_valgrind == true
         run: |
