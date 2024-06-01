@@ -274,7 +274,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           choco install opencv --params "/InstallDir:C:\tools"
-          echo "OPENCV_DIR=C:/tools/opencv/build/x64/vc15" >> $GITHUB_ENV
+          echo "OPENCV_DIR=C:/tools/opencv/build/x64/vc16/lib" >> $GITHUB_ENV
 
 
       - name: Set OpenCV_DIR for CMake
